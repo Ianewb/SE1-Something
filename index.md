@@ -1,4 +1,4 @@
-## CALENDAR
+## Calendar
 ### From Something Normal
 
 Brought to you by a group dedicated to normalizing your every day life!
