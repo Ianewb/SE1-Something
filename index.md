@@ -1,3 +1,11 @@
+## CALENDAR
+### From Something Normal
+
+Brought to you by a group dedicated to normalizing your every day life!
+
+A new app is born to fix your every group scheduling need.
+
+
 ## Welcome to GitHub Pages
 
 You can use the [editor on GitHub](https://github.com/Ianewb/SE1-Something/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
