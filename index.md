@@ -48,11 +48,11 @@ Visit the [Official website](http://beautifuljekyll.com/examples) to see sample 
 If you'd like to showcase yourself and join this list, [upgrading to the Individual plan](https://github.com/sponsors/daattali/sponsorships?&tier_id=7362) will give you that publicity plus some other rewards!
 
 # Downloads:
-- Iteration 1 
-The pdf for Iteration 1 of Calendar: "SE1_SomethingNormal_Calendar.pdf"
-The zip for Iteration 1 of Calendar: "SE1_SomethingNormal_Iteration1.zip"
-- Iteration 2
-- Iteration 3
+## Iteration 1 
+The pdf for Iteration 1 of Calendar: "/SE1_SomethingNormal_Calendar.pdf"
+The zip for Iteration 1 of Calendar: "/SE1_SomethingNormal_Iteration1.zip"
+## Iteration 2
+## Iteration 3
 
 # FAQ and support
 
