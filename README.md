@@ -15,8 +15,8 @@
 
 # Downloads:
 ## Iteration 1 
-The pdf for Iteration 1 of Calendar: "/SE1_SomethingNormal_Calendar.pdf"
-The zip for Iteration 1 of Calendar: "/SE1_SomethingNormal_Iteration1.zip"
+- The pdf for Iteration 1 of Calendar: "/SE1_SomethingNormal_Calendar.pdf"
+- The zip for Iteration 1 of Calendar: "/SE1_SomethingNormal_Iteration1.zip"
 ## Iteration 2
 ## Iteration 3
 
