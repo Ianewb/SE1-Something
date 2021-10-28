@@ -1,1 +1,19 @@
-Kekw
+### Hours spent on project
+
+**Jason Wu** 
+* 25.5 hours
+
+**Jacob Senior** 
+* 27 hours
+
+**Ricky Zhao** 
+* unaccounted for now
+
+**Yi Ding** 
+* 6.5 hours
+
+We used [Trello](https://trello.com/b/HqqftTBT/something-normal) to keep track of our progress.
+
+### Gannt Diagram
+
+[Gannt]
