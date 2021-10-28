@@ -1,15 +1,14 @@
-Our Team
-- Jason Wu
-- Jacob Senior
-- Ricky Zhao
-- Yi Ding
+### Our Team
 
+**Jason Wu** 
+* Team Lead
+* Back end developer
 
-### Jason Wu the Team Lead
-* Kekw
-### Jacob Senior
+**Jacob Senior** 
 * Front end developer
-### Ricky Zhao 
+
+**Ricky Zhao** 
 * UI engineer
-### Yi Ding
-* Front end developer
+
+**Yi Ding** 
+* Website developer
