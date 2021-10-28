@@ -15,9 +15,10 @@ author: Yi Ding
 
 navbar-links:
   Members: "Members"
-  Resources:
-    - Diagram Videos: "https://www.youtube.com/watch?v=iik25wqIuFo"
-    - Project Information: "https://www.youtube.com/watch?v=iik25wqIuFo"
+  UC Videos: "https://www.youtube.com/watch?v=iik25wqIuFo"
+  Documentation: "https://www.youtube.com/watch?v=iik25wqIuFo"
+  Issue Tracking: "https://github.com/Ianewb/SE1-Something/issues"
+  Progress Tracking: "Hours"
 # --- Logo --- #
 
 # Image to show in the navigation bar - works best with a square image
@@ -38,7 +39,6 @@ round-avatar: false
 # Uncomment the links you want to show and add your information to each one.
 social-network-links:
   github: Ianewb/SE1-Something
-  trello: /b/HqqftTBT/something-normal
 
 # --- General options --- #
 
