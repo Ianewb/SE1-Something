@@ -16,4 +16,4 @@ We used [Trello](https://trello.com/b/HqqftTBT/something-normal) to keep track o
 
 ### Gannt Diagram
 
-![Gannt](https://github.com/Ianewb/SE1-Something/blob/site/assets/Iterations/SomethingNormalCalendar.png)
+![Gannt](assets/Iterations/SomethingNormalCalendar.png)
