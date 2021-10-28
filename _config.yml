@@ -14,7 +14,7 @@ author: Yi Ding
 # --- List of links in the navigation bar --- #
 
 navbar-links:
-  Among Us: "aboutme"
+  Among Us: "Members"
   Resources:
     - Diagrams: "https://www.youtube.com/watch?v=iik25wqIuFo"
     - Project Information: "https://www.youtube.com/watch?v=iik25wqIuFo"
@@ -40,7 +40,7 @@ round-avatar: false
 # Uncomment the links you want to show and add your information to each one.
 social-network-links:
   github: Ianewb/SE1-Something
-  trello: something-normal
+  trello: /b/HqqftTBT/something-normal
 
 # --- General options --- #
 
