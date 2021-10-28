@@ -14,12 +14,10 @@ author: Yi Ding
 # --- List of links in the navigation bar --- #
 
 navbar-links:
-  Among Us: "Members"
+  Members: "Members"
   Resources:
-    - Diagrams: "https://www.youtube.com/watch?v=iik25wqIuFo"
+    - Diagram Videos: "https://www.youtube.com/watch?v=iik25wqIuFo"
     - Project Information: "https://www.youtube.com/watch?v=iik25wqIuFo"
-  Author's home: "https://deanattali.com"
-
 # --- Logo --- #
 
 # Image to show in the navigation bar - works best with a square image
