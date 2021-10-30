@@ -1,1 +1,1 @@
-This is where the Revised Iteration 1 pdf will go
+This is where the Iteration 2 VPP files will go
