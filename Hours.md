@@ -1,13 +1,13 @@
 ### Hours spent on project
 
 **Jason Wu** 
-* 28.5 hours
+* 40 hours
 
 **Jacob Senior** 
-* 32 hours
+* 42 hours
 
 **Ricky Zhao** 
-* unaccounted for now
+* 27 hours
 
 **Yi Ding** 
 * 13.5 hours
