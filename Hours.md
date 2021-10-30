@@ -10,7 +10,7 @@
 * unaccounted for now
 
 **Yi Ding** 
-* 6.5 hours
+* 13.5 hours
 
 We used [Trello](https://trello.com/b/HqqftTBT/something-normal) to keep track of our progress.
 
