@@ -1,5 +1,7 @@
-package dbInfo;
+package main.java.dbInfo;
 
-public class EventDTO {
+public class EventDTO extends DTO{
+
+
 
 }

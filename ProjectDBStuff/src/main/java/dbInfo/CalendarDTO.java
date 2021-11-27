@@ -8,11 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.sql.*;
 import java.util.stream.Stream;
 
-public class CalendarDTO {
-    private static final String DB_DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
-    private static final String DB_CONNECTION = "jdbc:derby:ex1connect;";
-    private static final String DB_User = "";
-    private static final String DB_PASSWORD = "";
+public class CalendarDTO extends DTO{
 
     @DisplayName("Should Print Results")
     @ParameterizedTest(name = "{index} => emp = {0}")
@@ -59,24 +55,6 @@ public class CalendarDTO {
                 Arguments.of(new Calendar(new User("Bob Ross", "BobSauss@baylor.edu", "deezusNut5"), "Bob Ross Calendar")),
                 Arguments.of(new Calendar(new User("Rob Boss", "RobBoss@baylor.edu", "NeezusDut5"), "Rob Soss Calendar"))
         );
-    }
-
-
-
-    private static Connection getDBConnection() {
-        Connection dbConnection = null;
-        try {
-            Class.forName(DB_DRIVER);
-        } catch (ClassNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-        try {
-            dbConnection = DriverManager.getConnection(DB_CONNECTION, DB_User, DB_PASSWORD);
-            return dbConnection;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return dbConnection;
     }
 
 }

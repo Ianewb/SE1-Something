@@ -9,12 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.sql.*;
 import java.util.stream.Stream;
 
-public class UserDTO {
-    private static final String DB_DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
-    private static final String DB_CONNECTION = "jdbc:derby:ex1connect;";
-    private static final String DB_User = "";
-    private static final String DB_PASSWORD = "";
-
+public class UserDTO extends DTO{
     User store;
 
     @DisplayName("Should Print Results")
@@ -61,7 +56,7 @@ public class UserDTO {
     private static Stream<Arguments> objectList() {
         return Stream.of(
                 Arguments.of(new User("Bob Ross", "BobRoss@baylor.edu", "deezusNut5")),
-                Arguments.of(new User("Bob Ross", "BobRoss@baylor.edu", "deezusNut5")),
+                Arguments.of(new User("Bob Ross", "BobRoss@baylor.edu", "deezusNuts")),
                 Arguments.of(new User("Bob Ross", "BobSauss@baylor.edu", "deezusNut5")),
                 Arguments.of(new User("Rob Boss", "RobBoss@baylor.edu", "NeezusDut5"))
         );
@@ -257,21 +252,5 @@ public class UserDTO {
                 Arguments.of(new String("EMAIL LIKE 'R%'")),
                 Arguments.of(new String("EMAIL LIKE 'B%'"))
         );
-    }
-
-    private static Connection getDBConnection() {
-        Connection dbConnection = null;
-        try {
-            Class.forName(DB_DRIVER);
-        } catch (ClassNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-        try {
-            dbConnection = DriverManager.getConnection(DB_CONNECTION, DB_User, DB_PASSWORD);
-            return dbConnection;
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return dbConnection;
     }
 }
