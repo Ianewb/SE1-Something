@@ -5,21 +5,23 @@ import java.util.*;
 
 public class Event {
     List<User> userList = new ArrayList<User>();
-    Date resource;
+    String description, name, location;
+    Date resourceStart;
+    Date resourceEnd;
     SimpleDateFormat sdf;
     int id, calendarID;
 
     Event(User u, Date d, int cID)
     {
         userList.add(u);
-        resource = d;
+        resourceStart = d;
         calendarID = cID;
     }
 
     public boolean checkConflicts(Event e)
     {
         boolean conflicts = false;
-        if(e.resource == this.resource)
+        if(e.resourceStart == this.resourceStart)
         {
             conflicts = true;
         }

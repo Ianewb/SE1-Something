@@ -3,20 +3,21 @@ package main.java.dbInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Calendar {
+public class CalendarApp {
     static int HOST = 3;
     static int ADMIN = 2;
     static int MEMBER = 1;
     static int VIEWER = 0;
 
     List<User> userList = new ArrayList<User>();
-    List<Event> eventsList = new ArrayList<Event>();
     List<Integer> accessLvls = new ArrayList<Integer>();
+    List<Event> eventsList = new ArrayList<Event>();
+
     User Host;
     String name;
     int id;
 
-    Calendar(User h, String n)
+    CalendarApp(User h, String n)
     {
         name = n;
         Host = h;
