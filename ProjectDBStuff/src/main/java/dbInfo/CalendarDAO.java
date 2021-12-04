@@ -12,6 +12,10 @@ import java.sql.Statement;
 import java.util.stream.Stream;
 
 public class CalendarDAO extends DTO {
+    private EventDAO eventStore;
+
+    public CalendarDAO(){};
+
     @DisplayName("Should Print Results")
     @ParameterizedTest(name = "{index} => emp = {0}")
     @MethodSource("objectList")
@@ -37,29 +41,10 @@ public class CalendarDAO extends DTO {
                 getSQL = "SELECT * FROM Events WHERE " +
                         "C_ID = " + returning.id;
                 //execute statement
-                statement.execute(getSQL);
+                rs = statement.executeQuery(getSQL);
                 if(rs.next()!= false) {
                     do {
-                        Event populate = null;
-                        populate.calendarID = returning.id;
-                        populate.id = rs.getInt("ID");
-                        populate.name = rs.getString("NAME");
-                        populate.description = rs.getString("DESCRIPTION");
-                        populate.location = rs.getString("LOCATION");
-                        populate.resourceStart= rs.getDate("START");
-                        populate.resourceStart= rs.getDate("END");
-
-                        getSQL = "SELECT * FROM Users WHERE " +
-                                "C_ID = " + returning.id;
-                        ResultSet userSet = statement.executeQuery(getSQL);
-                        while(userSet.next() != false)
-                        {
-                            User members = null;
-                            members.username = userSet.getString("NAME");
-                            members.email = userSet.getString("EMAIL");
-                            populate.addUser(members);
-                        }
-                        returning.addEvent(populate);
+                        returning.addEvent(eventStore.getEvent(rs.getInt("ID")));
                     } while (rs.next());
                 }
             }

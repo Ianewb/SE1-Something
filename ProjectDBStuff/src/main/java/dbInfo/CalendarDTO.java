@@ -9,8 +9,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Stream;
 
 public class CalendarDTO extends DTO{
@@ -19,8 +17,6 @@ public class CalendarDTO extends DTO{
     @ParameterizedTest(name = "{index} => emp = {0}")
     @MethodSource("objectList")
     public void save(CalendarApp emp){
-        List<Event> eL = new ArrayList<Event>();
-
         Connection dbConnection = null;
         Statement statement = null;
         String saveSQL = null;
@@ -33,9 +29,8 @@ public class CalendarDTO extends DTO{
             ResultSet rs = statement.executeQuery(getSQLDat);
             System.out.println("Got SQL Data");
             if (rs.next() == false) {
-                saveSQL = "INSERT INTO CalendarS(ID,NAME)" +
+                saveSQL = "INSERT INTO CalendarS(NAME)" +
                         " values(" +
-                        emp.id + ", " +
                         emp.name + ")";
             } else {
                 saveSQL = "UPDATE UserS SET " +

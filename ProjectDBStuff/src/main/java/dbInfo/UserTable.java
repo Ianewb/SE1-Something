@@ -15,7 +15,6 @@ public class UserTable {
         Connection dbConnection = null;
         Statement statement = null;
         String createTableSQL = "CREATE TABLE USERS("
-                + " ACCESS SMALLINT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 0),"
                 + " NAME VARCHAR(255) NOT NULL, "
                 + " EMAIL VARCHAR(255) NOT NULL, "
                 + " PASSWORD VARCHAR(255) NOT NULL, "

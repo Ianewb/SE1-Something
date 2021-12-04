@@ -16,7 +16,8 @@ public class CalendarTable {
         Statement statement = null;
         String createTableSQL = "CREATE TABLE CALENDARs("
                 + " ID BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 0, INCREMENT BY 1),"
-                + " NAME VARCHAR(255) NOT NULL, "
+                + " NAME VARCHAR(255) NOT NULL,"
+                + " DATE TIMESTAMP"
                 + " PRIMARY KEY (ID)"
                 + ")";
         try {

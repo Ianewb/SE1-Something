@@ -28,7 +28,7 @@ public class UserDTO extends DTO{
             ResultSet rs = statement.executeQuery(getSQLDat);
             System.out.println("Got SQL Data");
             if (rs.next() == false) {
-                saveSQL = "INSERT INTO UserS(ACCESS,NAME, EMAIL, PASSWORD)" +
+                saveSQL = "INSERT INTO UserS(NAME, EMAIL, PASSWORD)" +
                         " values(" +
                         emp.username + ", " +
                         emp.email + ", " +

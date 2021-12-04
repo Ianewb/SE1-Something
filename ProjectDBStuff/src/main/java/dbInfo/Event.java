@@ -9,23 +9,28 @@ public class Event {
     Date resourceStart;
     Date resourceEnd;
     SimpleDateFormat sdf;
-    int id, calendarID;
+    int calendarID;
 
-    Event(User u, Date d, int cID)
+    Event(User u, Date s, Date e, int cID)
     {
         userList.add(u);
-        resourceStart = d;
+        resourceStart = s;
+        resourceEnd = e;
         calendarID = cID;
     }
 
     public boolean checkConflicts(Event e)
     {
         boolean conflicts = false;
-        if(e.resourceStart == this.resourceStart)
+        if(e.resourceStart == this.resourceStart || e.resourceEnd == this.resourceEnd)
         {
             conflicts = true;
         }
         return conflicts;
+    }
+
+    public void addUser(User u){
+        userList.add(u);
     }
 
 }

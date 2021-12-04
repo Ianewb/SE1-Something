@@ -1,6 +1,7 @@
 package main.java.dbInfo;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class CalendarApp {
@@ -16,6 +17,7 @@ public class CalendarApp {
     User Host;
     String name;
     int id;
+    Calendar currentDate;
 
     CalendarApp(User h, String n)
     {

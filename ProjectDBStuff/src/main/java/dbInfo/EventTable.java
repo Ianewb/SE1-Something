@@ -15,12 +15,14 @@ public class EventTable {
         Connection dbConnection = null;
         Statement statement = null;
         String createTableSQL = "CREATE TABLE EventS("
+                + " C_ID BIGINT NOT NULL,"
                 + " USER_EMAIL VARCHAR(255),"
-                + " DATE TIMESTAMP NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 0, INCREMENT BY 1),"
+                + " DATE_START TIMESTAMP NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 0, INCREMENT BY 1),"
+                + " DATE_END TIMESTAMP NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 0, INCREMENT BY 1),"
                 + " NAME VARCHAR(255),"
                 + " DESCRIPTION VARCHAR(255),"
                 + " LOCATION VARCHAR(255) NOT NULL,"
-                + " PRIMARY KEY (ID)"
+                + " PRIMARY KEY (DATE_START, DATE_END)"
                 + ")";
         try {
             dbConnection = getDBConnection();
