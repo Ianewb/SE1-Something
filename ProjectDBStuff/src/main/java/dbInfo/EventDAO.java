@@ -12,8 +12,6 @@ import java.sql.Statement;
 import java.util.stream.Stream;
 
 public class EventDAO extends DTO{
-    UserDAO userStore;
-
     public EventDAO(){};
 
     @DisplayName("Should Print Results")
@@ -32,16 +30,19 @@ public class EventDAO extends DTO{
             // execute the SQL stetement
             ResultSet rs = statement.executeQuery(getSQLDat);
             System.out.println("Got SQL Data");
+            //Checks if sql query gets anything
             if (rs.next() == false) {
                 System.out.println("Event does not exist.");
             }
             else {
-                returning.calendarID = rs.getInt("C_ID");
-                returning.name = rs.getString("NAME");
-                returning.description = rs.getString("DESCRIPTION");
-                returning.location = rs.getString("LOCATION");
-                returning.resourceStart= rs.getDate("START");
-                returning.resourceEnd= rs.getDate("END");
+                //Creates the Calendar that was gotten
+                returning.setCalID(rs.getInt("C_ID"));
+                returning.setName(rs.getString("NAME"));
+                returning.setDescription(("DESCRIPTION"));
+                returning.setLocation(rs.getString("LOCATION"));
+                returning.setStart(rs.getString("START"));
+                returning.setEnd(rs.getString("END"));
+                //Creates SQl query to populate Calendar with Users
                 getSQL = "SELECT * FROM Users WHERE " +
                         "C_ID = " + returning.calendarID;
 
@@ -49,8 +50,8 @@ public class EventDAO extends DTO{
                 statement.execute(getSQL);
 
                 if(rs.next()!= false) {
-                    do {
-                        returning.addUser(userStore.getUser(rs.getString("EMAIL")));
+                    do {//Adds Users to the Calendar
+                        returning.addUser(rs.getString("EMAIL"));
                     } while (rs.next());
                 }
             }
@@ -70,10 +71,10 @@ public class EventDAO extends DTO{
     @SuppressWarnings("unused")
     private static Stream<Arguments> objectList() {
         return Stream.of(
-                Arguments.of(new CalendarApp(new User("Bob Ross", "BobRoss@baylor.edu", "deezusNut5"), "Bob Ross Calendar")),
-                Arguments.of(new CalendarApp(new User("Bob Ross", "BobRoss@baylor.edu", "deezusNut5"), "Bob Ross Calendar")),
-                Arguments.of(new CalendarApp(new User("Bob Ross", "BobSauss@baylor.edu", "deezusNut5"), "Bob Ross Calendar")),
-                Arguments.of(new CalendarApp(new User("Rob Boss", "RobBoss@baylor.edu", "NeezusDut5"), "Rob Soss Calendar"))
+                Arguments.of(new Event(new User("Bob Ross", "BobRoss@baylor.edu", "deezusNut5"), "2022-12-11 09:00:00","2022-12-11 11:00:00",1)),
+                Arguments.of(new Event(new User("Bob Ross", "BobRoss@baylor.edu", "deezusNut5"), "2022-12-11 09:00:00","2022-12-11 11:00:00",1)),
+                Arguments.of(new Event(new User("Bob Ross", "BobSauss@baylor.edu", "deezusNut5"), "2022-12-11 09:00:00","2022-12-11 11:00:00",1)),
+                Arguments.of(new Event(new User("Rob Boss", "RobBoss@baylor.edu", "NeezusDut5"), "2022-12-11 09:00:00","2022-12-11 11:00:00",1))
         );
     }
 }

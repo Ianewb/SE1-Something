@@ -9,8 +9,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Stream;
 
 public class EventDTO extends DTO{
@@ -19,13 +17,11 @@ public class EventDTO extends DTO{
     @ParameterizedTest(name = "{index} => emp = {0}")
     @MethodSource("objectList")
     public void save(Event emp){
-        List<User> eL = new ArrayList<User>();
-
         Connection dbConnection = null;
         Statement statement = null;
         String saveSQL = null;
         String getSQLDat = "SELECT * FROM Events " +
-                            "WHERE DATE_START=" + emp.resourceStart + " AND DATE_END=" + emp.resourceEnd;
+                            "WHERE DATE_START='" + emp.getStart() + "' AND DATE_END='" + emp.getEnd() + "'";
         try {
             dbConnection = getDBConnection();
             statement = dbConnection.createStatement();
@@ -34,34 +30,30 @@ public class EventDTO extends DTO{
             ResultSet rs = statement.executeQuery(getSQLDat);
             System.out.println("Got SQL Data");
             if (rs.next() == false) {
-                saveSQL = "";
-                for(String e: emp.emails)
+                for(String e: emp.getUsers())
                 {
                     saveSQL += "INSERT INTO Events(C_ID,USER_EMAIL, DATE_START, DATE_END, NAME, DESCRIPTION, LOCATION)" +
                             " values(" +
-                            emp.calendarID + ", " +
-                            e + ", " +
-                            emp.resourceStart + ", " +
-                            emp.resourceEnd + ", " +
-                            emp.name + ", " +
-                            emp.description + ", " +
-                            emp.location + ", " +")";
+                            emp.getCalID() + ", " +
+                            e + ", '" +
+                            emp.getStart() + "', '" +
+                            emp.getEnd() + "', " +
+                            emp.getName()+ ", " +
+                            emp.getDescription() + ", " +
+                            emp.getLocation()+ ", " +")";
                 }
 
             } else {
-                saveSQL = "";
-                for(String e: emp.emails)
+                for(String e: emp.getUsers())
                 {
                     saveSQL += "UPDATE Events SET" +
-                            " C_ID=" + emp.calendarID +
+                            " C_ID=" + emp.getCalID() +
                             ", USER_EMAILS=" + e +
-                            ", DATE_START=" + emp.resourceStart +
-                            ", DATE_END=" + emp.resourceEnd +
-                            ", NAME=" + emp.name +
-                            ", DESCRIPTION=" + emp.description +
-                            ", LOCATION=" + emp.location +
-                            "WHERE DATE_START=" + emp.resourceStart +
-                            " AND DATE_END=" + emp.resourceEnd;
+                            ", NAME=" + emp.getName() +
+                            ", DESCRIPTION=" + emp.getDescription() +
+                            ", LOCATION=" + emp.getLocation() +
+                            "WHERE DATE_START='" + emp.getStart() + "'" +
+                            " AND DATE_END='" + emp.getEnd() + "'";
                 }
             }
             //execute statement
@@ -79,10 +71,10 @@ public class EventDTO extends DTO{
     @SuppressWarnings("unused")
     private static Stream<Arguments> objectList() {
         return Stream.of(
-                Arguments.of(new CalendarApp(new User("Bob Ross", "BobRoss@baylor.edu", "deezusNut5"), "Bob Ross Calendar")),
-                Arguments.of(new CalendarApp(new User("Bob Ross", "BobRoss@baylor.edu", "deezusNut5"), "Bob Ross Calendar")),
-                Arguments.of(new CalendarApp(new User("Bob Ross", "BobSauss@baylor.edu", "deezusNut5"), "Bob Ross Calendar")),
-                Arguments.of(new CalendarApp(new User("Rob Boss", "RobBoss@baylor.edu", "NeezusDut5"), "Rob Soss Calendar"))
+                Arguments.of(new Event(new User("Bob Ross", "BobRoss@baylor.edu", "deezusNut5"), "2022-12-11 09:00:00","2022-12-11 11:00:00",1)),
+                Arguments.of(new Event(new User("Bob Ross", "BobRoss@baylor.edu", "deezusNut5"), "2022-12-11 09:00:00","2022-12-11 11:00:00",1)),
+                Arguments.of(new Event(new User("Bob Ross", "BobSauss@baylor.edu", "deezusNut5"), "2022-12-11 09:00:00","2022-12-11 11:00:00",1)),
+                Arguments.of(new Event(new User("Rob Boss", "RobBoss@baylor.edu", "NeezusDut5"), "2022-12-11 09:00:00","2022-12-11 11:00:00",1))
         );
     }
 

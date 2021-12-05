@@ -1,7 +1,6 @@
 package main.java.dbInfo;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class CalendarApp {
@@ -10,36 +9,30 @@ public class CalendarApp {
     static int MEMBER = 1;
     static int VIEWER = 0;
 
-    List<User> userList = new ArrayList<User>();
+    List<String> emails = new ArrayList<String>();
     List<Integer> accessLvls = new ArrayList<Integer>();
     List<Event> eventsList = new ArrayList<Event>();
 
-    User Host;
+    String userHost;
     String name;
     int id;
-    Calendar currentDate;
 
-    CalendarApp(User h, String n)
+    CalendarApp(String h, String n)
     {
         name = n;
-        Host = h;
-        userList.add(Host);
+        userHost = h;
+        emails.add(h);
         accessLvls.add(HOST);
     }
 
-    public Integer getAccessLvl(User u)
+    public Integer getAccessLvl(String u)
     {
         int i = -1;
-        if(userList.indexOf(u) != -1)
+        if(emails.indexOf(u) != -1)
         {
-            i = accessLvls.get(userList.indexOf(u));
+            i = accessLvls.get(emails.indexOf(u));
         }
         return i;
-    }
-
-    public void addEvent(Event e)
-    {
-        eventsList.add(e);
     }
 
     public void bookResources(Event e)
@@ -58,4 +51,34 @@ public class CalendarApp {
             eventsList.add(e);
         }
     }
+
+    public void addEvent(Event e)
+    {
+        eventsList.add(e);
+    }
+
+    public void addUser(String u){
+        emails.add(u);
+    }
+
+    public List<String> getUsers()
+    {
+        return emails;
+    }
+
+    public String getName()
+    {
+        return this.name;
+    }
+
+    public String getHost()
+    {
+        return this.userHost;
+    }
+
+    public int getCalID()
+    {
+        return this.id;
+    }
+
 }
