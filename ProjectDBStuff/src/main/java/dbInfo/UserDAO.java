@@ -21,7 +21,6 @@ public class UserDAO extends DTO{
         User returning = null;
         Connection dbConnection = null;
         Statement statement = null;
-        String getSQL = null;
         String getSQLDat = "SELECT * FROM Users WHERE EMAIL = " + email;
         try {
             dbConnection = getDBConnection();
@@ -54,10 +53,9 @@ public class UserDAO extends DTO{
     @SuppressWarnings("unused")
     private static Stream<Arguments> objectList() {
         return Stream.of(
-                Arguments.of(new CalendarApp(new User("Bob Ross", "BobRoss@baylor.edu", "deezusNut5"), "Bob Ross Calendar")),
-                Arguments.of(new CalendarApp(new User("Bob Ross", "BobRoss@baylor.edu", "deezusNut5"), "Bob Ross Calendar")),
-                Arguments.of(new CalendarApp(new User("Bob Ross", "BobSauss@baylor.edu", "deezusNut5"), "Bob Ross Calendar")),
-                Arguments.of(new CalendarApp(new User("Rob Boss", "RobBoss@baylor.edu", "NeezusDut5"), "Rob Soss Calendar"))
+                Arguments.of("BobRoss@baylor.edu"),
+                Arguments.of("BobSauss@baylor.edu"),
+                Arguments.of("RobBoss@baylor.edu")
         );
     }
 }
