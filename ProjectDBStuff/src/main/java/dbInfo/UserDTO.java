@@ -19,7 +19,7 @@ public class UserDTO extends DTO{
         Connection dbConnection = null;
         Statement statement = null;
         String saveSQL = null;
-        String getSQLDat = "SELECT username FROM UserS WHERE email=" + emp.email;
+        String getSQLDat = "SELECT username FROM UserS WHERE email=" + emp.getEmail();
         try {
             dbConnection = getDBConnection();
             statement = dbConnection.createStatement();
@@ -30,15 +30,14 @@ public class UserDTO extends DTO{
             if (rs.next() == false) {
                 saveSQL = "INSERT INTO UserS(NAME, EMAIL, PASSWORD)" +
                         " values(" +
-                        emp.username + ", " +
-                        emp.email + ", " +
-                        emp.password + ")";
+                        emp.getName() + ", " +
+                        emp.getEmail() + ", " +
+                        emp.getPassword() + ")";
             } else {
                 saveSQL = "UPDATE UserS SET " +
-                        "USERNAME = " + emp.username +
-                        ", EMAIL = " + emp.email +
-                        ", PASSWORD = " + emp.password +
-                        "WHERE EMAIL =" + emp.email ;
+                        "USERNAME = " + emp.getName() +
+                        ", PASSWORD = " + emp.getPassword() +
+                        "WHERE EMAIL =" + emp.getEmail() ;
             }
             //execute statement
             statement.execute(saveSQL);
@@ -62,7 +61,7 @@ public class UserDTO extends DTO{
         );
     }
 
-
+    //returns whether user exists in the the DB or not
     @DisplayName("Should Print User with matching email")
     @ParameterizedTest(name = "{index} => nam = {0}, pass = {1}")
     @MethodSource("primaryKey")
@@ -70,7 +69,7 @@ public class UserDTO extends DTO{
         boolean found = false;
         Connection dbConnection = null;
         Statement statement = null;
-        String selectUserSQL = "SELECT ACCESS, USERNAME, EMAIL, PASSWORD " +
+        String selectUserSQL = "SELECT NAME EMAIL, PASSWORD " +
                 "FROM UserS " +
                 "WHERE PASSWORD=" + pass + " AND USERNAME=" + nam;
         try {
@@ -102,6 +101,7 @@ public class UserDTO extends DTO{
                 Arguments.of("Rob Boss", "deezNut5")
         );
     }
+
 
     @DisplayName("Should delete User with matching ID")
     @ParameterizedTest(name = "{index} => id = {0}")
@@ -141,9 +141,9 @@ public class UserDTO extends DTO{
     {
         Connection dbConnection = null;
         Statement statement = null;
-        String selectUserSQL = "SELECT USERNAME, EMAIL, PASSWORD " +
+        String selectUserSQL = "SELECT NAME, EMAIL, PASSWORD " +
                 "FROM UserS " +
-                "ORDER BY USERNAME";
+                "ORDER BY NAME";
         try {
             dbConnection = getDBConnection();
             statement = dbConnection.createStatement();
@@ -155,7 +155,7 @@ public class UserDTO extends DTO{
             } else {
                 System.out.println("\tNAME\tEMAIL\t");
                 do {
-                    String Name = rs.getString("USERNAME");
+                    String Name = rs.getString("NAME");
                     String Email = rs.getString("EMAIL");
                     //String Pass = rs.getString("password");
                     System.out.print(Name + "\t");
@@ -174,6 +174,7 @@ public class UserDTO extends DTO{
         }
     }
 
+    //Counts number of users in the Database
     @Test
     public void count()
     {
@@ -190,10 +191,7 @@ public class UserDTO extends DTO{
             if (rs.next() == false) {
                 System.out.println("ResultSet is empty in Java");
             } else {
-                do {
-                    int rows = rs.getInt("EMAIL");
-                    System.out.println("User Count: " + rows);
-                } while (rs.next());
+                System.out.println("User Count: COUNT");
             }
             if (statement != null) {
                 statement.close();
@@ -212,10 +210,10 @@ public class UserDTO extends DTO{
     public void find(String s){
         Connection dbConnection = null;
         Statement statement = null;
-        String selectUserSQL = "SELECT USERNAME, EMAIL, PASSWORD " +
+        String selectUserSQL = "SELECT NAME, EMAIL, PASSWORD " +
                 "FROM UserS " +
                 "WHERE " + s + " " +
-                "ORDER BY USERNAME";
+                "ORDER BY NAME";
 
         try {
             dbConnection = getDBConnection();
@@ -228,7 +226,7 @@ public class UserDTO extends DTO{
             } else {
                 System.out.println("NAME\tEMAIL\t");
                 do {
-                    String Name = rs.getString("USERNAME");
+                    String Name = rs.getString("NAME");
                     String Email = rs.getString("EMAIL");
                     //String Pass = rs.getString("password");
                     System.out.print(Name + "\t");

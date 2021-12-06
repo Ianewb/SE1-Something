@@ -33,9 +33,9 @@ public class UserDAO extends DTO{
                 System.out.println("Email does not exist.");
             }
             else {
-                returning.username = rs.getString("NAME");
-                returning.email = rs.getString("EMAIL");
-                returning.password = rs.getString("PASSWORD");
+                returning.setName(rs.getString("NAME"));
+                returning.setEmail(rs.getString("EMAIL"));
+                returning.setPassword(rs.getString("PASSWORD"));
             }
 
             if (statement != null) {

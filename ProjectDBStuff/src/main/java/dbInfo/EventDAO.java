@@ -44,7 +44,7 @@ public class EventDAO extends DTO{
                 returning.setEnd(rs.getString("END"));
                 //Creates SQl query to populate Calendar with Users
                 getSQL = "SELECT * FROM Users WHERE " +
-                        "C_ID = " + returning.calendarID;
+                        "C_ID = " + returning.getCalID();
 
                 //execute statement
                 statement.execute(getSQL);
@@ -71,10 +71,14 @@ public class EventDAO extends DTO{
     @SuppressWarnings("unused")
     private static Stream<Arguments> objectList() {
         return Stream.of(
-                Arguments.of(new Event(new User("Bob Ross", "BobRoss@baylor.edu", "deezusNut5"), "2022-12-11 09:00:00","2022-12-11 11:00:00",1)),
-                Arguments.of(new Event(new User("Bob Ross", "BobRoss@baylor.edu", "deezusNut5"), "2022-12-11 09:00:00","2022-12-11 11:00:00",1)),
-                Arguments.of(new Event(new User("Bob Ross", "BobSauss@baylor.edu", "deezusNut5"), "2022-12-11 09:00:00","2022-12-11 11:00:00",1)),
-                Arguments.of(new Event(new User("Rob Boss", "RobBoss@baylor.edu", "NeezusDut5"), "2022-12-11 09:00:00","2022-12-11 11:00:00",1))
+                Arguments.of(new Event(new User("Bob Ross", "BobRoss@baylor.edu", "deezusNut5"),
+                        "2022-12-11 09:00:00","2022-12-11 11:00:00",1)),
+                Arguments.of(new Event(new User("Bob Ross", "BobRoss@baylor.edu", "deezusNut5"),
+                        "2022-12-11 09:00:00","2022-12-11 11:00:00",1)),
+                Arguments.of(new Event(new User("Bob Ross", "BobSauss@baylor.edu", "deezusNut5"),
+                        "2022-12-11 09:00:00","2022-12-11 11:00:00",1)),
+                Arguments.of(new Event(new User("Rob Boss", "RobBoss@baylor.edu", "NeezusDut5"),
+                        "2022-12-11 09:00:00","2022-12-11 11:00:00",1))
         );
     }
 }
