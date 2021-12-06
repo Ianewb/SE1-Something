@@ -20,7 +20,7 @@ public class CalendarDTO extends DTO{
         Connection dbConnection = null;
         Statement statement = null;
         String saveSQL = null;
-        String getSQLDat = "SELECT name FROM CalendarS WHERE ID=" + emp.id;
+        String getSQLDat = "SELECT name FROM CalendarS WHERE ID=" + emp.getID();
         try {
             dbConnection = getDBConnection();
             statement = dbConnection.createStatement();
@@ -29,13 +29,14 @@ public class CalendarDTO extends DTO{
             ResultSet rs = statement.executeQuery(getSQLDat);
             System.out.println("Got SQL Data");
             if (rs.next() == false) {
-                saveSQL = "INSERT INTO CalendarS(NAME)" +
+                saveSQL = "INSERT INTO CalendarS(ID, NAME)" +
                         " values(" +
-                        emp.name + ")";
+                        emp.getID() + ", " +
+                        emp.getName() +")";
             } else {
                 saveSQL = "UPDATE UserS SET " +
-                        "ID = " + emp.id +
-                        ", NAME = " + emp.name;
+                        "ID = " + emp.getID() +
+                        ", NAME = " + emp.getName();
             }
             //execute statement
             statement.execute(saveSQL);
@@ -52,10 +53,10 @@ public class CalendarDTO extends DTO{
     @SuppressWarnings("unused")
     private static Stream<Arguments> objectList() {
         return Stream.of(
-                Arguments.of(new CalendarApp(new User("Bob Ross", "BobRoss@baylor.edu", "deezusNut5"), "Bob Ross Calendar")),
-                Arguments.of(new CalendarApp(new User("Bob Ross", "BobRoss@baylor.edu", "deezusNut5"), "Bob Ross Calendar")),
-                Arguments.of(new CalendarApp(new User("Bob Ross", "BobSauss@baylor.edu", "deezusNut5"), "Bob Ross Calendar")),
-                Arguments.of(new CalendarApp(new User("Rob Boss", "RobBoss@baylor.edu", "NeezusDut5"), "Rob Soss Calendar"))
+                Arguments.of(new CalendarApp("BobRoss@baylor.edu", "Bob Ross Calendar")),
+                Arguments.of(new CalendarApp("BobRoss@baylor.edu", "Bob Ross Calendar")),
+                Arguments.of(new CalendarApp("BobSauss@baylor.edu", "Bob Ross Calendar")),
+                Arguments.of(new CalendarApp("RobBoss@baylor.edu", "Rob Soss Calendar"))
         );
     }
 

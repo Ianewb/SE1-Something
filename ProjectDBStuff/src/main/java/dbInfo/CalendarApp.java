@@ -25,16 +25,7 @@ public class CalendarApp {
         accessLvls.add(HOST);
     }
 
-    public Integer getAccessLvl(String u)
-    {
-        int i = -1;
-        if(emails.indexOf(u) != -1)
-        {
-            i = accessLvls.get(emails.indexOf(u));
-        }
-        return i;
-    }
-
+    //books resources in the calendar
     public void bookResources(Event e)
     {
         boolean conflicted = false;
@@ -52,6 +43,7 @@ public class CalendarApp {
         }
     }
 
+    //add event and user
     public void addEvent(Event e)
     {
         eventsList.add(e);
@@ -61,6 +53,7 @@ public class CalendarApp {
         emails.add(u);
     }
 
+    //getters for Event list of user emails, name, host email, CalendarID, and access level of specific user
     public List<String> getUsers()
     {
         return emails;
@@ -76,9 +69,65 @@ public class CalendarApp {
         return this.userHost;
     }
 
-    public int getCalID()
+    public int getID()
     {
         return this.id;
     }
 
+    public Integer getAccessLvl(String u)
+    {
+        int i = -1;
+        if(emails.contains(u))
+        {
+            i = accessLvls.get(emails.indexOf(u));
+        }
+        return i;
+    }
+
+    //Setters for name, access levels, and ID
+    public void setName(String s)
+    {
+        this.name = s;
+    }
+
+    public void setHost(String e)
+    {
+        if(emails.contains(e))
+        {
+            accessLvls.remove((emails.indexOf(e)));
+            accessLvls.add((emails.indexOf(e)), HOST);
+        }
+    }
+
+    public void setAdmin(String e)
+    {
+        if(emails.contains(e))
+        {
+            accessLvls.remove((emails.indexOf(e)));
+            accessLvls.add((emails.indexOf(e)), ADMIN);
+        }
+    }
+
+    public void setMember(String e)
+    {
+        if(emails.contains(e))
+        {
+            accessLvls.remove((emails.indexOf(e)));
+            accessLvls.add((emails.indexOf(e)), MEMBER);
+        }
+    }
+
+    public void setViewer(String e)
+    {
+        if(emails.contains(e))
+        {
+            accessLvls.remove((emails.indexOf(e)));
+            accessLvls.add((emails.indexOf(e)), VIEWER);
+        }
+    }
+
+    public void setID(int id)
+    {
+        this.id = id;
+    }
 }
