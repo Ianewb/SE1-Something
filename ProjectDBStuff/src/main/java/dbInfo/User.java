@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User {
-    UserDTO toData;
     String username;
     String email;
     String password;
@@ -19,23 +18,18 @@ public class User {
         password = p;
     }
 
-    public void createNewLogin()
-    {
-        toData.save(this);
-    }
-
     //getters for Event list of user emails, name, location, description, start and end dates, and CalendarID
     public String getName()
     {
-        return this.username;
+        return  this.username ;
     }
     public String getEmail()
     {
-        return this.email;
+        return  this.email;
     }
     public String getPassword()
     {
-        return this.password + this.getClass().hashCode();
+        return this.password ;
     }
 
     //Setters for Event name, location, description, start and end dates, and CalendarID

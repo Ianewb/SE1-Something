@@ -31,12 +31,12 @@ public class CalendarDTO extends DTO{
             if (rs.next() == false) {
                 saveSQL = "INSERT INTO CalendarS(ID, NAME)" +
                         " values(" +
-                        emp.getID() + ", " +
-                        emp.getName() +")";
+                        emp.getID() + ", '" +
+                        emp.getName() +"')";
             } else {
                 saveSQL = "UPDATE UserS SET " +
                         "ID = " + emp.getID() +
-                        ", NAME = " + emp.getName();
+                        ", NAME = '" + emp.getName() + "'";
             }
             //execute statement
             statement.execute(saveSQL);

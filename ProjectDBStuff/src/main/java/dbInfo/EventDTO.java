@@ -34,13 +34,13 @@ public class EventDTO extends DTO{
                 {
                     saveSQL += "INSERT INTO Events(C_ID,USER_EMAIL, DATE_START, DATE_END, NAME, DESCRIPTION, LOCATION)" +
                             " values(" +
-                            emp.getCalID() + ", " +
-                            e + ", '" +
+                            emp.getCalID() + ", '" +
+                            e + "', '" +
                             emp.getStart() + "', '" +
-                            emp.getEnd() + "', " +
-                            emp.getName()+ ", " +
-                            emp.getDescription() + ", " +
-                            emp.getLocation()+ ", " +")";
+                            emp.getEnd() + "', '" +
+                            emp.getName()+ "', '" +
+                            emp.getDescription() + "', '" +
+                            emp.getLocation()+ "')";
                 }
 
             } else {
@@ -48,11 +48,11 @@ public class EventDTO extends DTO{
                 {
                     saveSQL += "UPDATE Events SET" +
                             " C_ID=" + emp.getCalID() +
-                            ", USER_EMAILS=" + e +
-                            ", NAME=" + emp.getName() +
-                            ", DESCRIPTION=" + emp.getDescription() +
-                            ", LOCATION=" + emp.getLocation() +
-                            "WHERE DATE_START='" + emp.getStart() + "'" +
+                            ", USER_EMAILS='" + e +
+                            "', NAME='" + emp.getName() +
+                            "', DESCRIPTION='" + emp.getDescription() +
+                            "', LOCATION='" + emp.getLocation() +
+                            "' WHERE DATE_START='" + emp.getStart() + "'" +
                             " AND DATE_END='" + emp.getEnd() + "'";
                 }
             }

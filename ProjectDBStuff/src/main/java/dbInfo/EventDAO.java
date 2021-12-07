@@ -22,7 +22,7 @@ public class EventDAO extends DTO{
         Connection dbConnection = null;
         Statement statement = null;
         String getSQL = null;
-        String getSQLDat = "SELECT * FROM Events WHERE ID = " + id;
+        String getSQLDat = "SELECT * FROM Events WHERE ID = '" + id + "'";
         try {
             dbConnection = getDBConnection();
             statement = dbConnection.createStatement();
@@ -80,5 +80,30 @@ public class EventDAO extends DTO{
                 Arguments.of(new Event(new User("Rob Boss", "RobBoss@baylor.edu", "NeezusDut5"),
                         "2022-12-11 09:00:00","2022-12-11 11:00:00",1))
         );
+    }
+
+    @DisplayName("Should delete User with matching ID")
+    @ParameterizedTest(name = "{index} => id = {0}")
+    @MethodSource("emails")
+    public void deleteEvent(String start){
+        Connection dbConnection = null;
+        Statement statement = null;
+        String deleteUserSQL = "DELETE FROM Events WHERE DATE_START= '" + start + "'";
+        try {
+            dbConnection = getDBConnection();
+            statement = dbConnection.createStatement();
+            System.out.println(deleteUserSQL);
+            // execute delete SQL stetement
+            statement.execute(deleteUserSQL);
+            System.out.println("Record is deleted from DBUser table!");
+            if (statement != null) {
+                statement.close();
+            }
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

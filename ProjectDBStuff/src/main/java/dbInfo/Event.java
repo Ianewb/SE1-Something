@@ -11,19 +11,19 @@ import java.util.Locale;
 public class Event {
     List<User> userList = new ArrayList<User>();
     List<String> emails = new ArrayList<String>();
-    String description, name, location;
+    String description = "N/A", name = "N/A", location = "N/A";
     Date resourceStart = new Date();
     Date resourceEnd = new Date();
     int calendarID;
 
     DateFormat si= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
 
-    Event(User u, String s, String e, int cID)
+    Event(User u, String start, String end, int cID)
     {
         userList.add(u);
         try {
-            resourceStart = si.parse(s);
-            resourceEnd = si.parse(e);
+            resourceStart = si.parse(start);
+            resourceEnd = si.parse(end);
         } catch (ParseException e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();

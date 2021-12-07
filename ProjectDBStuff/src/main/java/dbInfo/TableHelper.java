@@ -33,6 +33,12 @@ public class TableHelper extends DTO {
 
     public static void main(String []args)
     {
+        UserDAO ugetter = new UserDAO();
+        UserDTO ucreator = new UserDTO();
+        EventDAO eGetter = new EventDAO();
+        EventDTO eCreator = new EventDTO();
+        CalendarDAO cGetter = new CalendarDAO();
+        CalendarDTO cCreator = new CalendarDTO();
         try
         {
             if(!isTableExists("USERS",getDBConnection()))
@@ -53,7 +59,35 @@ public class TableHelper extends DTO {
             System.out.println("SQL Exception: " + e.getMessage());
         }
 
+        ucreator.save(new User("Bob", "Ross@gmail.com", "12345"));
+        User checker = ugetter.getUser("Ross@gmail.com");
+        ugetter.count();
+        ugetter.deleteUser("Ross@gmail.com");
+        if(checker != null)
+        {
+            System.out.println("User Is: " + "\nName: " + checker.getName()
+                    + "\nEmail: " + checker.getEmail()
+                    + "\nPassword: " + checker.getPassword());
+        }
+        else
+        {
+            System.out.println("User does not exist, or DB failed");
+        }
+        ugetter.count();
 
+        eCreator.save(new Event(checker, "2022-12-11 09:00:00","2022-12-11 11:00:00",1));
+        Event checker = eGetter.getEvent("");
+        eGetter.deleteEvent("Ross@gmail.com");
+        if(checker != null)
+        {
+            System.out.println("User Is: " + "\nName: " + checker.getName()
+                    + "\nEmail: " + checker.getEmail()
+                    + "\nPassword: " + checker.getPassword());
+        }
+        else
+        {
+            System.out.println("User does not exist, or DB failed");
+        }
     }
 
 }

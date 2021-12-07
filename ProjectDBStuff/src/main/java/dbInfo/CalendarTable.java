@@ -15,7 +15,7 @@ public class CalendarTable {
         Connection dbConnection = null;
         Statement statement = null;
         String createTableSQL = "CREATE TABLE CALENDARs("
-                + " ID BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 0, INCREMENT BY 1),"
+                + " ID BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY (Start with 0, Increment by 1),"
                 + " NAME VARCHAR(255) NOT NULL,"
                 + " DATE TIMESTAMP"
                 + " PRIMARY KEY (ID)"
@@ -28,7 +28,7 @@ public class CalendarTable {
             statement.execute(createTableSQL);
             System.out.println("Table \"Calendars\" is created!");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage() + " " + e.getSQLState());
         } finally {
             if (statement != null) {
                 statement.close();
