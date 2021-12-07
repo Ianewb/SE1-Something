@@ -5,8 +5,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.sql.*;
-import java.text.ParseException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.stream.Stream;
 
 public class EventDTO extends DTO{
@@ -43,7 +45,6 @@ public class EventDTO extends DTO{
                             emp.getDescription() + "', '" +
                             emp.getLocation()+ "') ";
                 }
-                System.out.println(saveSQL + " \nstart: " + emp.getStart() + "\nend: " + si.parse(emp.getEnd()));
             } else {
                for(String e: emp.getUsers())
                {
@@ -65,7 +66,7 @@ public class EventDTO extends DTO{
             if (dbConnection != null) {
                 dbConnection.close();
             }
-        } catch (SQLException | ParseException ex) {
+        } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }

@@ -101,11 +101,11 @@ public class Event {
     //Setters for Event name, location, description, start and end dates, and CalendarID
     public void setName(String s)
     {
-        this.description = s;
+        this.name = s;
     }
     public void setLocation(String s)
     {
-        this.description = s;
+        this.location = s;
     }
     public void setDescription(String s)
     {
