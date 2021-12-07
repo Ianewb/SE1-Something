@@ -1,4 +1,4 @@
-package dbInfo;
+package main.java.dbInfo;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,7 +11,7 @@ public class EventTable {
     private static final String DB_USER = "";
     private static final String DB_PASSWORD = "";
 
-    private static void createDbEventTable() throws SQLException {
+    public static void createDbEventTable() throws SQLException {
         Connection dbConnection = null;
         Statement statement = null;
         String createTableSQL = "CREATE TABLE EventS("

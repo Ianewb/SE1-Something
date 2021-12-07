@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+//General DTO for connection strings and getconnection
 public class DTO {
+
     protected static final String DB_DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
     protected static final String DB_CONNECTION = "jdbc:derby:ex1connect;";
     protected static final String DB_User = "";

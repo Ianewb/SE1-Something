@@ -11,7 +11,7 @@ public class UserTable {
     private static final String DB_USER = "";
     private static final String DB_PASSWORD = "";
 
-    private static void createDbUserTable() throws SQLException {
+    public static void createDbUserTable() throws SQLException {
         Connection dbConnection = null;
         Statement statement = null;
         String createTableSQL = "CREATE TABLE USERS("

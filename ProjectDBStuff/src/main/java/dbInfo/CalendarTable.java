@@ -11,7 +11,7 @@ public class CalendarTable {
     private static final String DB_Calendar = "";
     private static final String DB_PASSWORD = "";
 
-    private static void createDbCalendarTable() throws SQLException {
+    public static void createDbCalendarTable() throws SQLException {
         Connection dbConnection = null;
         Statement statement = null;
         String createTableSQL = "CREATE TABLE CALENDARs("
