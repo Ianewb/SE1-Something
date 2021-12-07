@@ -60,6 +60,51 @@ public class UserDAO extends DTO{
         );
     }
 
+    //Checks if the user exists in the database
+    @DisplayName("Should Print Results")
+    @ParameterizedTest(name = "{index} => email = {0}, password = {1}")
+    @MethodSource("emailPass")
+    public boolean verifyUser(String email, String password){
+        boolean exists = false;
+        User returning = null;
+        Connection dbConnection = null;
+        Statement statement = null;
+        String getSQLDat = "SELECT * FROM Users WHERE EMAIL = '" + email + "' AND PASSWORD = '" + password + "'";
+        try {
+            dbConnection = getDBConnection();
+            statement = dbConnection.createStatement();
+            System.out.println(getSQLDat);
+            // execute the SQL stetement
+            ResultSet rs = statement.executeQuery(getSQLDat);
+            System.out.println("Got SQL Data");
+            if (rs.next() == false) {
+                System.out.println("User does not exist.");
+            }
+            else {
+                exists = true;
+            }
+
+            if (statement != null) {
+                statement.close();
+            }
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return exists;
+    }
+    @SuppressWarnings("unused")
+    private static Stream<Arguments> emailPass() {
+        return Stream.of(
+                Arguments.of("BobRoss@baylor.edu", "12345"),
+                Arguments.of("BobSauss@baylor.edu", "12543"),
+                Arguments.of("RobBoss@baylor.edu", "54321")
+        );
+    }
+
+    //delete user with the string
     @DisplayName("Should delete User with matching ID")
     @ParameterizedTest(name = "{index} => id = {0}")
     @MethodSource("emails")
@@ -93,6 +138,7 @@ public class UserDAO extends DTO{
         );
     }
 
+    //get all
     @Test
     public void findAll()
     {

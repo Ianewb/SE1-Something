@@ -9,10 +9,14 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 import java.util.stream.Stream;
 
 public class EventDAO extends DTO{
     public EventDAO(){};
+    DateFormat si= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
 
     @DisplayName("Should Print Results")
     @ParameterizedTest(name = "{index} => emp = {0}")
@@ -22,7 +26,7 @@ public class EventDAO extends DTO{
         Connection dbConnection = null;
         Statement statement = null;
         String getSQL = null;
-        String getSQLDat = "SELECT * FROM Events WHERE ID = '" + id + "'";
+        String getSQLDat = "SELECT * FROM Events WHERE C_ID = " + id ;
         try {
             dbConnection = getDBConnection();
             statement = dbConnection.createStatement();
@@ -40,8 +44,8 @@ public class EventDAO extends DTO{
                 returning.setName(rs.getString("NAME"));
                 returning.setDescription(("DESCRIPTION"));
                 returning.setLocation(rs.getString("LOCATION"));
-                returning.setStart(rs.getString("START"));
-                returning.setEnd(rs.getString("END"));
+                returning.setStart(si.format(rs.getDate("START")));
+                returning.setEnd(si.format(rs.getDate("END")));
                 //Creates SQl query to populate Calendar with Users
                 getSQL = "SELECT * FROM Users WHERE " +
                         "C_ID = " + returning.getCalID();

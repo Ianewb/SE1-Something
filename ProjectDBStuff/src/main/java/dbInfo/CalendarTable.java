@@ -15,9 +15,9 @@ public class CalendarTable {
         Connection dbConnection = null;
         Statement statement = null;
         String createTableSQL = "CREATE TABLE CALENDARs("
-                + " ID BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY (Start with 0, Increment by 1),"
+                + " ID BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 0, INCREMENT BY 1),"
                 + " NAME VARCHAR(255) NOT NULL,"
-                + " DATE TIMESTAMP"
+                + " DATE TIMESTAMP,"
                 + " PRIMARY KEY (ID)"
                 + ")";
         try {

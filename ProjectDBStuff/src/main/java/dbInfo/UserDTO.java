@@ -1,12 +1,14 @@
 package main.java.dbInfo;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.stream.Stream;
 
 public class UserDTO extends DTO{
@@ -59,9 +61,4 @@ public class UserDTO extends DTO{
                 Arguments.of(new User("Rob Boss", "RobBoss@baylor.edu", "NeezusDut5"))
         );
     }
-
-
-
-
-
 }

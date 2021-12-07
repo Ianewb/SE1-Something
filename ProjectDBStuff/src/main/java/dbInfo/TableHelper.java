@@ -5,9 +5,9 @@ import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static main.java.dbInfo.CalendarTable.createDbCalendarTable;
-import static main.java.dbInfo.EventTable.createDbEventTable;
-import static main.java.dbInfo.UserTable.createDbUserTable;
+import static main.java.dbInfo.CalendarTable.*;
+import static main.java.dbInfo.EventTable.*;
+import static main.java.dbInfo.UserTable.*;
 
 public class TableHelper extends DTO {
     public static boolean isTableExists(String TableName, Connection c) throws SQLException
@@ -33,12 +33,6 @@ public class TableHelper extends DTO {
 
     public static void main(String []args)
     {
-        UserDAO ugetter = new UserDAO();
-        UserDTO ucreator = new UserDTO();
-        EventDAO eGetter = new EventDAO();
-        EventDTO eCreator = new EventDTO();
-        CalendarDAO cGetter = new CalendarDAO();
-        CalendarDTO cCreator = new CalendarDTO();
         try
         {
             if(!isTableExists("USERS",getDBConnection()))
@@ -59,6 +53,8 @@ public class TableHelper extends DTO {
             System.out.println("SQL Exception: " + e.getMessage());
         }
 
+        UserDAO ugetter = new UserDAO();
+        UserDTO ucreator = new UserDTO();
         ucreator.save(new User("Bob", "Ross@gmail.com", "12345"));
         User checker = ugetter.getUser("Ross@gmail.com");
         ugetter.count();
@@ -75,8 +71,14 @@ public class TableHelper extends DTO {
         }
         ugetter.count();
 
+        CalendarDAO cGetter = new CalendarDAO();
+        CalendarDTO cCreator = new CalendarDTO();
+
+
+        EventDAO eGetter = new EventDAO();
+        EventDTO eCreator = new EventDTO();
         eCreator.save(new Event(checker, "2022-12-11 09:00:00","2022-12-11 11:00:00",1));
-        Event checker = eGetter.getEvent("");
+        Event echecker = eGetter.getEvent(1);
         eGetter.deleteEvent("Ross@gmail.com");
         if(checker != null)
         {
