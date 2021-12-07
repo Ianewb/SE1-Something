@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Tue Dec 07 07:35:54 CST 2021:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.1.0 - (1808820): instance a816c00e-017d-951b-9a57-0000057139f8 
+Tue Dec 07 07:51:05 CST 2021:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.1.0 - (1808820): instance a816c00e-017d-9529-80ca-00000570c788 
 on database directory C:\Users\jjw73\Desktop\School\College Stuff\Baylor\CompSci\SoftwareEngineering\SE1\Project\Iteration3\SE1-Something\ProjectDBStuff\ex1connect with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@1d44bcfa 
 Loaded from file:/C:/Users/jjw73/.m2/repository/org/apache/derby/derby/10.14.1.0/derby-10.14.1.0.jar
 java.vendor=Oracle Corporation

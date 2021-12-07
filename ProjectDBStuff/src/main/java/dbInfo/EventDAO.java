@@ -43,9 +43,8 @@ public class EventDAO extends DTO{
                 returning.setLocation(rs.getString("LOCATION"));
                 returning.setStart(si.format(rs.getTimestamp("DATE_START")));
                 returning.setEnd(si.format(rs.getTimestamp("DATE_END")));
-                System.out.println(rs.getString("NAME") + returning.getName() + rs.getString("DESCRIPTION")+ rs.getString("LOCATION") );
                 //Creates SQl query to populate Calendar with Users
-               /* getSQL = "SELECT * FROM USERS u, EVENTS e WHERE " +
+                getSQL = "SELECT u.EMAIL FROM USERS u, EVENTS e WHERE " +
                         "e.USER_EMAIL = u.EMAIL ";
 
                 //execute statement
@@ -55,7 +54,7 @@ public class EventDAO extends DTO{
                     do {//Adds Users to the Event
                         returning.addUser(emailSet.getString("EMAIL"));
                     } while (emailSet.next());
-                }*/
+                }
             }
 
             if (statement != null) {

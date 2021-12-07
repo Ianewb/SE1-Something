@@ -87,9 +87,9 @@ public class TableHelper extends DTO {
         EventDAO eGetter = new EventDAO();
         EventDTO eCreator = new EventDTO();
         eCreator.save(new Event(checker, "2022-12-11 09:00:00","2022-12-11 11:00:00",0, "Test Event",
-                "This is a test event", "DeezNahtsHahGahteem"));
+                "This is a test event", "Denver, CO"));
         eCreator.save(new Event(checker, "2022-12-11 10:00:00","2022-12-11 11:00:00",0, "Test Event",
-                "This is a test event", "DeezNahtsHahGahteem"));
+                "This is a test event", "Denver, CO"));
         Event echecker = eGetter.getEvent(0, "2022-12-11 09:00:00");
         if(echecker!=null)
         {
@@ -100,6 +100,12 @@ public class TableHelper extends DTO {
                     + "\n\tEnd Date: " + echecker.getEnd()
                     + "\n\tCalendar ID: " + echecker.getCalID());
             Event Second = eGetter.getEvent(0,"2022-12-11 10:00:00" );
+            System.out.println("Event Is: " + "\n\tName: " + Second.getName()
+                    + "\n\tDescription: " + Second.getDescription()
+                    + "\n\tLocation: " + Second.getLocation()
+                    + "\n\tStart Date: " + Second.getStart()
+                    + "\n\tEnd Date: " + Second.getEnd()
+                    + "\n\tCalendar ID: " + Second.getCalID());
             if(echecker.checkConflicts(Second))
             {
                 System.out.println("Events are conflicting!");
@@ -109,7 +115,6 @@ public class TableHelper extends DTO {
         {
             System.out.println("Event does not exist, or DB failed");
         }
-        eGetter.deleteEvent("2022-12-11 09:00:00");
 
         CalendarApp cChecker = cGetter.getCalendar(0);
         if(cChecker != null)
@@ -119,13 +124,15 @@ public class TableHelper extends DTO {
                     + "\n\tUsers: ");
             for(String emails: cChecker.getUsers())
             {
-                System.out.println("\t" + emails + " ACCESS: " + cChecker.getAccessLvl(emails));
+                System.out.println("\t\t" + emails + " ACCESS: " + cChecker.getAccessLvl(emails));
             }
         }
         else
         {
             System.out.println("User does not exist, or DB failed");
         }
+
+        eGetter.deleteEvent("2022-12-11 09:00:00");
     }
 
 }

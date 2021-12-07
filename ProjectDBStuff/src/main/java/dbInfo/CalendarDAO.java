@@ -52,7 +52,7 @@ public class CalendarDAO extends DTO {
                 if(rs.next()) {
                     do {//adds users to the calendar
                         Event event = eventStore.getEvent(rs.getInt("C_ID"),
-                                                            si.format(rs.getDate("DATE_START")));
+                                                            si.format(rs.getTimestamp("DATE_START")));
                         returning.addEvent(event);
                         for(String u: event.getUsers())
                         {
