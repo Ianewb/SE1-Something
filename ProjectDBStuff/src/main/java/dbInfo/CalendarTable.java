@@ -39,7 +39,7 @@ public class CalendarTable {
         }
     }
 
-    private static void dropDbCalendarTable() throws SQLException {
+    public static void dropDbCalendarTable() throws SQLException {
         Connection dbConnection = null;
         Statement statement = null;
         String createTableSQL = "DROP TABLE Calendars";

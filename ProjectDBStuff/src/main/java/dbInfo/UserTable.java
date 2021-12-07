@@ -39,7 +39,7 @@ public class UserTable {
         }
     }
 
-    private static void dropDbUserTable() throws SQLException {
+    public static void dropDbUserTable() throws SQLException {
         Connection dbConnection = null;
         Statement statement = null;
         String createTableSQL = "DROP TABLE Users";

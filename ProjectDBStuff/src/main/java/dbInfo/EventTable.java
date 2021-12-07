@@ -43,7 +43,7 @@ public class EventTable {
         }
     }
 
-    private static void dropDbEventTable() throws SQLException {
+    public static void dropDbEventTable() throws SQLException {
         Connection dbConnection = null;
         Statement statement = null;
         String createTableSQL = "DROP TABLE EventS";

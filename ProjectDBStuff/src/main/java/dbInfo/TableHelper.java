@@ -5,10 +5,6 @@ import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static main.java.dbInfo.CalendarTable.*;
-import static main.java.dbInfo.EventTable.*;
-import static main.java.dbInfo.UserTable.*;
-
 public class TableHelper extends DTO {
     public static boolean isTableExists(String TableName, Connection c) throws SQLException
     {
@@ -37,15 +33,30 @@ public class TableHelper extends DTO {
         {
             if(!isTableExists("USERS",getDBConnection()))
             {
-                createDbUserTable();
+                UserTable.createDbUserTable();
+            }
+            else
+            {
+                UserTable.dropDbUserTable();
+                UserTable.createDbUserTable();
             }
             if(!isTableExists("EVENTS",getDBConnection()))
             {
-                createDbEventTable();
+                EventTable.createDbEventTable();
+            }
+            else
+            {
+                EventTable.dropDbEventTable();
+                EventTable.createDbEventTable();
             }
             if(!isTableExists("CALENDARS",getDBConnection()))
             {
-                createDbCalendarTable();
+                CalendarTable.createDbCalendarTable();
+            }
+            else
+            {
+                CalendarTable.dropDbCalendarTable();
+                CalendarTable.createDbCalendarTable();
             }
         }
         catch(SQLException e)
