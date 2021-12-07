@@ -15,13 +15,14 @@ import java.util.stream.Stream;
 public class UserDAO extends DTO{
     public UserDAO(){};
 
+    //returns the user with the input email
     @DisplayName("Should Print Results")
     @ParameterizedTest(name = "{index} => emp = {0}")
     @MethodSource("objectList")
     public User getUser(String email){
         User returning = null;
-        Connection dbConnection = null;
-        Statement statement = null;
+        Connection dbConnection;
+        Statement statement;
         String getSQLDat = "SELECT * FROM Users WHERE EMAIL = '" + email + "'";
         try {
             dbConnection = getDBConnection();
@@ -30,7 +31,7 @@ public class UserDAO extends DTO{
             // execute the SQL stetement
             ResultSet rs = statement.executeQuery(getSQLDat);
             System.out.println("Got SQL Data");
-            if (rs.next() == false) {
+            if (!rs.next()) {
                 System.out.println("Email does not exist.");
             }
             else {
@@ -77,7 +78,7 @@ public class UserDAO extends DTO{
             // execute the SQL stetement
             ResultSet rs = statement.executeQuery(getSQLDat);
             System.out.println("Got SQL Data");
-            if (rs.next() == false) {
+            if (!rs.next()) {
                 System.out.println("User does not exist.");
             }
             else {
@@ -153,7 +154,7 @@ public class UserDAO extends DTO{
             System.out.println(selectUserSQL);
             // execute select SQL stetement
             ResultSet rs = statement.executeQuery(selectUserSQL);
-            if (rs.next() == false) {
+            if (!rs.next()) {
                 System.out.println("ResultSet is empty in Java");
             } else {
                 System.out.println("\tNAME\tEMAIL\t");
@@ -191,7 +192,7 @@ public class UserDAO extends DTO{
             System.out.println(selectUserSQL);
             // execute select SQL stetement
             ResultSet rs = statement.executeQuery(selectUserSQL);
-            if (rs.next() == false) {
+            if (!rs.next()) {
                 System.out.println("ResultSet is empty in Java");
             } else {
                 System.out.println("User Count: " + rs.getInt(1) );
@@ -224,7 +225,7 @@ public class UserDAO extends DTO{
             System.out.println(selectUserSQL);
             // execute select SQL stetement
             ResultSet rs = statement.executeQuery(selectUserSQL);
-            if (rs.next() == false) {
+            if (!rs.next() ) {
                 System.out.println("ResultSet is empty in Java");
             } else {
                 System.out.println("NAME\tEMAIL\t");
@@ -250,8 +251,8 @@ public class UserDAO extends DTO{
     @SuppressWarnings("unused")
     private static Stream<Arguments> usersNam() {
         return Stream.of(
-                Arguments.of(new String("EMAIL LIKE 'R%'")),
-                Arguments.of(new String("EMAIL LIKE 'B%'"))
+                Arguments.of("EMAIL LIKE 'R%'"),
+                Arguments.of("EMAIL LIKE 'B%'")
         );
     }
 
