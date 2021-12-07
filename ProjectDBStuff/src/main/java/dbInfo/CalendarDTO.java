@@ -13,13 +13,14 @@ import java.util.stream.Stream;
 
 public class CalendarDTO extends DTO{
 
+    //
     @DisplayName("Should Print Results")
     @ParameterizedTest(name = "{index} => emp = {0}")
     @MethodSource("objectList")
     public void save(CalendarApp emp){
-        Connection dbConnection = null;
-        Statement statement = null;
-        String saveSQL = null;
+        Connection dbConnection;
+        Statement statement;
+        String saveSQL = "";
         String getSQLDat = "SELECT name FROM CalendarS WHERE ID=" + emp.getID();
         try {
             dbConnection = getDBConnection();
@@ -28,15 +29,17 @@ public class CalendarDTO extends DTO{
             // execute the SQL stetement
             ResultSet rs = statement.executeQuery(getSQLDat);
             System.out.println("Got SQL Data");
-            if (rs.next() == false) {
-                saveSQL = "INSERT INTO CalendarS(ID, NAME)" +
-                        " values(" +
-                        emp.getID() + ", '" +
-                        emp.getName() +"')";
+            if (!rs.next()) {
+                for(String uEmail: emp.getUsers())
+                {
+                    saveSQL += "INSERT INTO CalendarS(NAME)" +
+                            " values( '" +
+                            emp.getName() + "')";
+                }
             } else {
-                saveSQL = "UPDATE UserS SET " +
-                        "ID = " + emp.getID() +
-                        ", NAME = '" + emp.getName() + "'";
+                saveSQL = "UPDATE Calendars SET " +
+                        "NAME = '" + emp.getName() + "' " +
+                        "WHERE ID=" + emp.getID();
             }
             //execute statement
             statement.execute(saveSQL);

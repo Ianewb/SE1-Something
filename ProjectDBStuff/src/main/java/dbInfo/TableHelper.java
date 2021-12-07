@@ -66,15 +66,13 @@ public class TableHelper extends DTO {
 
         UserDAO ugetter = new UserDAO();
         UserDTO ucreator = new UserDTO();
-        ucreator.save(new User("Bob", "Ross@gmail.com", "12345"));
+        ucreator.save(new User("Bob", "Ross@gmail.com", "12345", 0));
         User checker = ugetter.getUser("Ross@gmail.com");
-        ugetter.count();
-        ugetter.deleteUser("Ross@gmail.com");
         if(checker != null)
         {
-            System.out.println("User Is: " + "\nName: " + checker.getName()
-                    + "\nEmail: " + checker.getEmail()
-                    + "\nPassword: " + checker.getPassword());
+            System.out.println("User Is: " + "\n\tName: " + checker.getName()
+                    + "\n\tEmail: " + checker.getEmail()
+                    + "\n\tPassword: " + checker.getPassword());
         }
         else
         {
@@ -84,18 +82,45 @@ public class TableHelper extends DTO {
 
         CalendarDAO cGetter = new CalendarDAO();
         CalendarDTO cCreator = new CalendarDTO();
-
+        cCreator.save(new CalendarApp("Ross@gmail.com", "Bob Ross Calendar"));
 
         EventDAO eGetter = new EventDAO();
         EventDTO eCreator = new EventDTO();
-        eCreator.save(new Event(checker, "2022-12-11 09:00:00","2022-12-11 11:00:00",1));
-        Event echecker = eGetter.getEvent(1);
-        eGetter.deleteEvent("Ross@gmail.com");
-        if(checker != null)
+        eCreator.save(new Event(checker, "2022-12-11 09:00:00","2022-12-11 11:00:00",0, "Test Event",
+                "This is a test event", "DeezNahtsHahGahteem"));
+        eCreator.save(new Event(checker, "2022-12-11 10:00:00","2022-12-11 11:00:00",0, "Test Event",
+                "This is a test event", "DeezNahtsHahGahteem"));
+        Event echecker = eGetter.getEvent(0, "2022-12-11 09:00:00");
+        if(echecker!=null)
         {
-            System.out.println("User Is: " + "\nName: " + checker.getName()
-                    + "\nEmail: " + checker.getEmail()
-                    + "\nPassword: " + checker.getPassword());
+            System.out.println("Event Is: " + "\n\tName: " + echecker.getName()
+                    + "\n\tDescription: " + echecker.getDescription()
+                    + "\n\tLocation: " + echecker.getLocation()
+                    + "\n\tStart Date: " + echecker.getStart()
+                    + "\n\tEnd Date: " + echecker.getEnd()
+                    + "\n\tCalendar ID: " + echecker.getCalID());
+            Event Second = eGetter.getEvent(0,"2022-12-11 10:00:00" );
+            if(echecker.checkConflicts(Second))
+            {
+                System.out.println("Events are conflicting!");
+            }
+        }
+        else
+        {
+            System.out.println("Event does not exist, or DB failed");
+        }
+        eGetter.deleteEvent("2022-12-11 09:00:00");
+
+        CalendarApp cChecker = cGetter.getCalendar(0);
+        if(cChecker != null)
+        {
+            System.out.println("Calendar Is: " + "\n\tName: " + cChecker.getName()
+                    + "\n\tID: " + cChecker.getID()
+                    + "\n\tUsers: ");
+            for(String emails: cChecker.getUsers())
+            {
+                System.out.println("\t" + emails + " ACCESS: " + cChecker.getAccessLvl(emails));
+            }
         }
         else
         {

@@ -14,21 +14,41 @@ public class Event {
     String description = "N/A", name = "N/A", location = "N/A";
     Date resourceStart = new Date();
     Date resourceEnd = new Date();
-    int calendarID;
+    int calendarID = -1;
 
     DateFormat si= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
 
+    Event(){}
+
     Event(User u, String start, String end, int cID)
     {
-        userList.add(u);
+        this.userList.add(u);
+        this.emails.add(u.getEmail());
         try {
-            resourceStart = si.parse(start);
-            resourceEnd = si.parse(end);
+            this.resourceStart = si.parse(start);
+            this.resourceEnd = si.parse(end);
         } catch (ParseException e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();
         }
-        calendarID = cID;
+        this.calendarID = cID;
+    }
+
+    Event(User u, String start, String end, int cID, String n, String des, String loc)
+    {
+        this.userList.add(u);
+        this.emails.add(u.getEmail());
+        try {
+            this.resourceStart = si.parse(start);
+            this.resourceEnd = si.parse(end);
+        } catch (ParseException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        this.calendarID = cID;
+        this.name = n;
+        this.description = des;
+        this.location = loc;
     }
 
     public boolean checkConflicts(Event e)
@@ -44,13 +64,13 @@ public class Event {
 
     //adds a user's email to the event's mailing list
     public void addUser(String u){
-        emails.add(u);
+        this.emails.add(u);
     }
 
-    //getters for Event list of user emails, name, location, description, start and end dates, and CalendarID
+    //getters for Event list of user emails, name, location, description, start and end dates, formatter, and CalendarID
     public List<String> getUsers()
     {
-        return emails;
+        return this.emails;
     }
     public String getName()
     {
@@ -72,6 +92,7 @@ public class Event {
     {
         return si.format(this.resourceEnd);
     }
+    public DateFormat getFormatter(){return this.si;}
     public int getCalID()
     {
         return this.calendarID;
@@ -93,7 +114,7 @@ public class Event {
     public void setStart(String s)
     {
         try {
-            resourceStart = si.parse(s);
+            this.resourceStart = si.parse(s);
         } catch (ParseException e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();
@@ -102,7 +123,7 @@ public class Event {
     public void setEnd(String s)
     {
         try {
-            resourceEnd = si.parse(s);
+            this.resourceEnd = si.parse(s);
         } catch (ParseException e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();

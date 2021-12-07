@@ -37,7 +37,8 @@ public class UserDAO extends DTO{
             else {
                 returning = new User(rs.getString("NAME"),
                                         rs.getString("EMAIL"),
-                                        rs.getString("PASSWORD"));
+                                        rs.getString("PASSWORD"),
+                                        rs.getInt("ACCESS"));
             }
 
             if (statement != null) {
@@ -67,7 +68,6 @@ public class UserDAO extends DTO{
     @MethodSource("emailPass")
     public boolean verifyUser(String email, String password){
         boolean exists = false;
-        User returning = null;
         Connection dbConnection = null;
         Statement statement = null;
         String getSQLDat = "SELECT * FROM Users WHERE EMAIL = '" + email + "' AND PASSWORD = '" + password + "'";
@@ -102,6 +102,49 @@ public class UserDAO extends DTO{
                 Arguments.of("BobRoss@baylor.edu", "12345"),
                 Arguments.of("BobSauss@baylor.edu", "12543"),
                 Arguments.of("RobBoss@baylor.edu", "54321")
+        );
+    }
+
+    //Checks if the user exists in the database
+    @DisplayName("Should Print Results")
+    @ParameterizedTest(name = "{index} => email = {0}, password = {1}")
+    @MethodSource("emailPass")
+    public boolean verifyUserExist(String email){
+        boolean exists = false;
+        Connection dbConnection = null;
+        Statement statement = null;
+        String getSQLDat = "SELECT * FROM Users WHERE EMAIL = '" + email + "'";
+        try {
+            dbConnection = getDBConnection();
+            statement = dbConnection.createStatement();
+            System.out.println(getSQLDat);
+            // execute the SQL stetement
+            ResultSet rs = statement.executeQuery(getSQLDat);
+            System.out.println("Got SQL Data");
+            if (!rs.next()) {
+                System.out.println("User does not exist.");
+            }
+            else {
+                exists = true;
+            }
+
+            if (statement != null) {
+                statement.close();
+            }
+            if (dbConnection != null) {
+                dbConnection.close();
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return exists;
+    }
+    @SuppressWarnings("unused")
+    private static Stream<Arguments> email() {
+        return Stream.of(
+                Arguments.of("BobRoss@baylor.edu"),
+                Arguments.of("BobSauss@baylor.edu"),
+                Arguments.of("RobBoss@baylor.edu")
         );
     }
 

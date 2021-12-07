@@ -28,17 +28,19 @@ public class UserDTO extends DTO{
             // execute the SQL stetement
             ResultSet rs = statement.executeQuery(getSQLDat);
             System.out.println("Got SQL Data");
-            if (rs.next() == false) {
-                saveSQL = "INSERT INTO UserS(NAME, EMAIL, PASSWORD)" +
+            if (!rs.next()) {
+                saveSQL = "INSERT INTO UserS(NAME, EMAIL, PASSWORD, ACCESS)" +
                         " values('" +
                         emp.getName() + "', '" +
                         emp.getEmail() + "', '" +
-                        emp.getPassword() + "')";
+                        emp.getPassword() + "', " +
+                        emp.getAccess() + ")";
             } else {
                 saveSQL = "UPDATE UserS SET " +
                         "NAME = '" + emp.getName() +
                         "', PASSWORD = '" + emp.getPassword() +
-                        "' WHERE EMAIL ='" + emp.getEmail() + "'";
+                        "', ACCESS = " + emp.getAccess() +
+                        " WHERE EMAIL ='" + emp.getEmail() + "'";
             }
             //execute statement
             statement.execute(saveSQL);
@@ -55,10 +57,10 @@ public class UserDTO extends DTO{
     @SuppressWarnings("unused")
     private static Stream<Arguments> objectList() {
         return Stream.of(
-                Arguments.of(new User("Bob Ross", "BobRoss@baylor.edu", "deezusNut5")),
-                Arguments.of(new User("Bob Ross", "BobRoss@baylor.edu", "deezusNuts")),
-                Arguments.of(new User("Bob Ross", "BobSauss@baylor.edu", "deezusNut5")),
-                Arguments.of(new User("Rob Boss", "RobBoss@baylor.edu", "NeezusDut5"))
+                Arguments.of(new User("Bob Ross", "BobRoss@baylor.edu", "deezusNut5",0)),
+                Arguments.of(new User("Bob Ross", "BobRoss@baylor.edu", "deezusNuts",0)),
+                Arguments.of(new User("Bob Ross", "BobSauss@baylor.edu", "deezusNut5",1)),
+                Arguments.of(new User("Rob Boss", "RobBoss@baylor.edu", "NeezusDut5",2))
         );
     }
 }

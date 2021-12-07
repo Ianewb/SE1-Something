@@ -21,8 +21,7 @@ public class EventTable {
                 + " DATE_END TIMESTAMP NOT NULL,"
                 + " NAME VARCHAR(255),"
                 + " DESCRIPTION VARCHAR(255),"
-                + " LOCATION VARCHAR(255) NOT NULL,"
-                + " PRIMARY KEY (DATE_START, DATE_END)"
+                + " LOCATION VARCHAR(255) NOT NULL"
                 + ")";
         try {
             dbConnection = getDBConnection();

@@ -3,9 +3,13 @@ package main.java.dbInfo;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 //General DTO for connection strings and getconnection
 public class DTO {
+    DateFormat si= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
 
     protected static final String DB_DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
     protected static final String DB_CONNECTION = "jdbc:derby:ex1connect;";

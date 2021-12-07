@@ -9,6 +9,7 @@ public class CalendarApp {
     static int MEMBER = 1;
     static int VIEWER = 0;
 
+    //Might need to incorporate accessLevels into the database
     List<String> emails = new ArrayList<String>();
     List<Integer> accessLvls = new ArrayList<Integer>();
     List<Event> eventsList = new ArrayList<Event>();
@@ -17,12 +18,20 @@ public class CalendarApp {
     String name;
     int id;
 
+    CalendarApp()
+    {
+        this.name = "";
+        this.userHost = "";
+        this.id = -1;
+    }
+
+    //constructor with host and Calendar name
     CalendarApp(String h, String n)
     {
-        name = n;
-        userHost = h;
-        emails.add(h);
-        accessLvls.add(HOST);
+        this.name = n;
+        this.userHost = h;
+        this.emails.add(h);
+        this.accessLvls.add(HOST);
     }
 
     //books resources in the calendar
@@ -51,6 +60,14 @@ public class CalendarApp {
 
     public void addUser(String u){
         emails.add(u);
+        if(emails.size() < 2)
+        {
+            accessLvls.add(HOST);
+        }
+        else
+        {
+            accessLvls.add(VIEWER);
+        }
     }
 
     //getters for Event list of user emails, name, host email, CalendarID, and access level of specific user

@@ -18,6 +18,7 @@ public class UserTable {
                 + " NAME VARCHAR(255) NOT NULL, "
                 + " EMAIL VARCHAR(255) NOT NULL, "
                 + " PASSWORD VARCHAR(255) NOT NULL, "
+                + " ACCESS SMALLINT NOT NULL, "
                 + " PRIMARY KEY (EMAIL)"
                 + ")";
         try {

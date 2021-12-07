@@ -9,24 +9,21 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
 import java.util.stream.Stream;
 
 public class EventDAO extends DTO{
     public EventDAO(){};
-    DateFormat si= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
+
 
     @DisplayName("Should Print Results")
     @ParameterizedTest(name = "{index} => emp = {0}")
     @MethodSource("objectList")
-    public Event getEvent(int id){
-        Event returning = null;
+    public Event getEvent(int id, String Start){
+        Event returning = new Event();
         Connection dbConnection = null;
         Statement statement = null;
         String getSQL = null;
-        String getSQLDat = "SELECT * FROM Events WHERE C_ID = " + id ;
+        String getSQLDat = "SELECT * FROM Events WHERE C_ID=" + id + " AND DATE_START=TIMESTAMP('" + Start + "')" ;
         try {
             dbConnection = getDBConnection();
             statement = dbConnection.createStatement();
@@ -39,24 +36,24 @@ public class EventDAO extends DTO{
                 System.out.println("Event does not exist.");
             }
             else {
-                //Creates the Calendar that was gotten
-                returning.setCalID(rs.getInt("C_ID"));
+                //Creates the Event that was gotten
+                returning.setCalID(id);
                 returning.setName(rs.getString("NAME"));
                 returning.setDescription(("DESCRIPTION"));
                 returning.setLocation(rs.getString("LOCATION"));
-                returning.setStart(si.format(rs.getDate("START")));
-                returning.setEnd(si.format(rs.getDate("END")));
+                returning.setStart(si.format(rs.getDate("DATE_START")));
+                returning.setEnd(si.format(rs.getDate("DATE_END")));
                 //Creates SQl query to populate Calendar with Users
-                getSQL = "SELECT * FROM Users WHERE " +
-                        "C_ID = " + returning.getCalID();
+                getSQL = "SELECT * FROM USERS u, EVENTS e WHERE " +
+                        "e.USER_EMAIL = u.EMAIL ";
 
                 //execute statement
-                statement.execute(getSQL);
+                ResultSet emailSet = statement.executeQuery(getSQL);
 
-                if(rs.next()!= false) {
-                    do {//Adds Users to the Calendar
-                        returning.addUser(rs.getString("EMAIL"));
-                    } while (rs.next());
+                if(emailSet.next()) {
+                    do {//Adds Users to the Event
+                        returning.addUser(emailSet.getString("EMAIL"));
+                    } while (emailSet.next());
                 }
             }
 
@@ -75,13 +72,13 @@ public class EventDAO extends DTO{
     @SuppressWarnings("unused")
     private static Stream<Arguments> objectList() {
         return Stream.of(
-                Arguments.of(new Event(new User("Bob Ross", "BobRoss@baylor.edu", "deezusNut5"),
+                Arguments.of(new Event(new User("Bob Ross", "BobRoss@baylor.edu", "deezusNut5", 0),
                         "2022-12-11 09:00:00","2022-12-11 11:00:00",1)),
-                Arguments.of(new Event(new User("Bob Ross", "BobRoss@baylor.edu", "deezusNut5"),
+                Arguments.of(new Event(new User("Bob Ross", "BobRoss@baylor.edu", "deezusNut5", 0),
                         "2022-12-11 09:00:00","2022-12-11 11:00:00",1)),
-                Arguments.of(new Event(new User("Bob Ross", "BobSauss@baylor.edu", "deezusNut5"),
+                Arguments.of(new Event(new User("Bob Ross", "BobSauss@baylor.edu", "deezusNut5", 1),
                         "2022-12-11 09:00:00","2022-12-11 11:00:00",1)),
-                Arguments.of(new Event(new User("Rob Boss", "RobBoss@baylor.edu", "NeezusDut5"),
+                Arguments.of(new Event(new User("Rob Boss", "RobBoss@baylor.edu", "NeezusDut5", 2),
                         "2022-12-11 09:00:00","2022-12-11 11:00:00",1))
         );
     }
