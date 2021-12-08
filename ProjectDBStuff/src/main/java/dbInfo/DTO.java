@@ -16,7 +16,7 @@ public class DTO {
     protected static final String DB_User = "";
     protected static final String DB_PASSWORD = "";
 
-    protected static Connection getDBConnection() {
+    public static Connection getDBConnection() {
         Connection dbConnection = null;
         try {
             Class.forName(DB_DRIVER);

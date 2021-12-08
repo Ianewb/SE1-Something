@@ -16,13 +16,10 @@ public class UserDTO extends DTO{
     @DisplayName("Should Print Results")
     @ParameterizedTest(name = "{index} => emp = {0}")
     @MethodSource("objectList")
-    public void save(User emp){
-        Connection dbConnection = null;
+    public void save(User emp, Connection dbConnection) throws SQLException{
         Statement statement = null;
         String saveSQL = null;
         String getSQLDat = "SELECT NAME FROM UserS WHERE email='" + emp.getEmail() +"'" ;
-        try {
-            dbConnection = getDBConnection();
             statement = dbConnection.createStatement();
             System.out.println(getSQLDat);
             // execute the SQL stetement
@@ -47,12 +44,6 @@ public class UserDTO extends DTO{
             if (statement != null) {
                 statement.close();
             }
-            if (dbConnection != null) {
-                dbConnection.close();
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
     }
     @SuppressWarnings("unused")
     private static Stream<Arguments> objectList() {

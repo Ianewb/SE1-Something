@@ -19,37 +19,30 @@ public class UserDAO extends DTO{
     @DisplayName("Should Print Results")
     @ParameterizedTest(name = "{index} => emp = {0}")
     @MethodSource("objectList")
-    public User getUser(String email){
+    public User getUser(String email, Connection dbConnection) throws SQLException{
         User returning = null;
-        Connection dbConnection;
         Statement statement;
         String getSQLDat = "SELECT * FROM Users WHERE EMAIL = '" + email + "'";
-        try {
-            dbConnection = getDBConnection();
-            statement = dbConnection.createStatement();
-            System.out.println(getSQLDat);
-            // execute the SQL stetement
-            ResultSet rs = statement.executeQuery(getSQLDat);
-            System.out.println("Got SQL Data");
-            if (!rs.next()) {
-                System.out.println("Email does not exist.");
-            }
-            else {
-                returning = new User(rs.getString("NAME"),
-                                        rs.getString("EMAIL"),
-                                        rs.getString("PASSWORD"),
-                                        rs.getInt("ACCESS"));
-            }
 
-            if (statement != null) {
-                statement.close();
-            }
-            if (dbConnection != null) {
-                dbConnection.close();
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+        statement = dbConnection.createStatement();
+        System.out.println(getSQLDat);
+        // execute the SQL stetement
+        ResultSet rs = statement.executeQuery(getSQLDat);
+        System.out.println("Got SQL Data");
+        if (!rs.next()) {
+            System.out.println("Email does not exist.");
         }
+        else {
+            returning = new User(rs.getString("NAME"),
+                                    rs.getString("EMAIL"),
+                                    rs.getString("PASSWORD"),
+                                    rs.getInt("ACCESS"));
+        }
+
+        if (statement != null) {
+            statement.close();
+        }
+
 
         return returning;
     }
@@ -66,34 +59,28 @@ public class UserDAO extends DTO{
     @DisplayName("Should Print Results")
     @ParameterizedTest(name = "{index} => email = {0}, password = {1}")
     @MethodSource("emailPass")
-    public boolean verifyUser(String email, String password){
+    public boolean verifyUser(String email, String password, Connection dbConnection) throws SQLException{
         boolean exists = false;
-        Connection dbConnection = null;
+
         Statement statement = null;
         String getSQLDat = "SELECT * FROM Users WHERE EMAIL = '" + email + "' AND PASSWORD = '" + password + "'";
-        try {
-            dbConnection = getDBConnection();
-            statement = dbConnection.createStatement();
-            System.out.println(getSQLDat);
-            // execute the SQL stetement
-            ResultSet rs = statement.executeQuery(getSQLDat);
-            System.out.println("Got SQL Data");
-            if (!rs.next()) {
-                System.out.println("User does not exist.");
-            }
-            else {
-                exists = true;
-            }
 
-            if (statement != null) {
-                statement.close();
-            }
-            if (dbConnection != null) {
-                dbConnection.close();
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+        statement = dbConnection.createStatement();
+        System.out.println(getSQLDat);
+        // execute the SQL stetement
+        ResultSet rs = statement.executeQuery(getSQLDat);
+        System.out.println("Got SQL Data");
+        if (!rs.next()) {
+            System.out.println("User does not exist.");
         }
+        else {
+            exists = true;
+        }
+
+        if (statement != null) {
+            statement.close();
+        }
+
         return exists;
     }
     @SuppressWarnings("unused")
@@ -109,34 +96,27 @@ public class UserDAO extends DTO{
     @DisplayName("Should Print Results")
     @ParameterizedTest(name = "{index} => email = {0}, password = {1}")
     @MethodSource("emailPass")
-    public boolean verifyUserExist(String email){
+    public boolean verifyUserExist(String email, Connection dbConnection) throws SQLException{
         boolean exists = false;
-        Connection dbConnection = null;
         Statement statement = null;
         String getSQLDat = "SELECT * FROM Users WHERE EMAIL = '" + email + "'";
-        try {
-            dbConnection = getDBConnection();
-            statement = dbConnection.createStatement();
-            System.out.println(getSQLDat);
-            // execute the SQL stetement
-            ResultSet rs = statement.executeQuery(getSQLDat);
-            System.out.println("Got SQL Data");
-            if (!rs.next()) {
-                System.out.println("User does not exist.");
-            }
-            else {
-                exists = true;
-            }
 
-            if (statement != null) {
-                statement.close();
-            }
-            if (dbConnection != null) {
-                dbConnection.close();
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+        statement = dbConnection.createStatement();
+        System.out.println(getSQLDat);
+        // execute the SQL stetement
+        ResultSet rs = statement.executeQuery(getSQLDat);
+        System.out.println("Got SQL Data");
+        if (!rs.next()) {
+            System.out.println("User does not exist.");
         }
+        else {
+            exists = true;
+        }
+
+        if (statement != null) {
+            statement.close();
+        }
+
         return exists;
     }
     @SuppressWarnings("unused")
@@ -152,25 +132,20 @@ public class UserDAO extends DTO{
     @DisplayName("Should delete User with matching ID")
     @ParameterizedTest(name = "{index} => id = {0}")
     @MethodSource("emails")
-    public void deleteUser(String email){
-        Connection dbConnection = null;
+    public void deleteUser(String email, Connection dbConnection) throws SQLException{
+
         Statement statement = null;
         String deleteUserSQL = "DELETE FROM UserS WHERE EMAIL= '" + email + "'";
-        try {
-            dbConnection = getDBConnection();
-            statement = dbConnection.createStatement();
-            System.out.println(deleteUserSQL);
-            // execute delete SQL stetement
-            statement.execute(deleteUserSQL);
-            System.out.println("Record is deleted from DBUser table!");
-            if (statement != null) {
-                statement.close();
-            }
-            if (dbConnection != null) {
-                dbConnection.close();
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+        statement = dbConnection.createStatement();
+        System.out.println(deleteUserSQL);
+        // execute delete SQL stetement
+        statement.execute(deleteUserSQL);
+        System.out.println("Record is deleted from DBUser table!");
+        if (statement != null) {
+            statement.close();
+        }
+        if (dbConnection != null) {
+            dbConnection.close();
         }
     }
 
@@ -182,88 +157,39 @@ public class UserDAO extends DTO{
         );
     }
 
-    //get all
-    @Test
-    public void findAll()
-    {
-        Connection dbConnection = null;
-        Statement statement = null;
-        String selectUserSQL = "SELECT * " +
-                "FROM UserS " +
-                "ORDER BY NAME";
-        try {
-            dbConnection = getDBConnection();
-            statement = dbConnection.createStatement();
-            System.out.println(selectUserSQL);
-            // execute select SQL stetement
-            ResultSet rs = statement.executeQuery(selectUserSQL);
-            if (!rs.next()) {
-                System.out.println("ResultSet is empty in Java");
-            } else {
-                System.out.println("\tNAME\tEMAIL\t");
-                do {
-                    String Name = rs.getString("NAME");
-                    String Email = rs.getString("EMAIL");
-                    String Pass = rs.getString("password");
-                    System.out.print(Name + "\t");
-                    System.out.println(Email + "\t");
-                    System.out.println("User password: " + Pass);
-                } while (rs.next());
-            }
-            if (statement != null) {
-                statement.close();
-            }
-            if (dbConnection != null) {
-                dbConnection.close();
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
     //Counts number of users in the Database
     @Test
-    public void count()
+    public void count(Connection dbConnection) throws SQLException
     {
-        Connection dbConnection = null;
+
         Statement statement = null;
         String selectUserSQL = "SELECT COUNT(DISTINCT EMAIL)" +
                 "FROM UserS ";
-        try {
-            dbConnection = getDBConnection();
-            statement = dbConnection.createStatement();
-            System.out.println(selectUserSQL);
-            // execute select SQL stetement
-            ResultSet rs = statement.executeQuery(selectUserSQL);
-            if (!rs.next()) {
-                System.out.println("ResultSet is empty in Java");
-            } else {
-                System.out.println("User Count: " + rs.getInt(1) );
-            }
-            if (statement != null) {
-                statement.close();
-            }
-            if (dbConnection != null) {
-                dbConnection.close();
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+
+        statement = dbConnection.createStatement();
+        System.out.println(selectUserSQL);
+        // execute select SQL stetement
+        ResultSet rs = statement.executeQuery(selectUserSQL);
+        if (!rs.next()) {
+            System.out.println("ResultSet is empty in Java");
+        } else {
+            System.out.println("User Count: " + rs.getInt(1) );
+        }
+        if (statement != null) {
+            statement.close();
         }
     }
 
     @DisplayName("Should Print User with Conditions")
     @ParameterizedTest(name = "{index} => emp = {0}")
     @MethodSource("empsNam")
-    public void find(String s){
-        Connection dbConnection = null;
+    public void find(String s, Connection dbConnection) throws SQLException{
+
         Statement statement = null;
         String selectUserSQL = "SELECT NAME, EMAIL, PASSWORD " +
                 "FROM UserS " +
                 "WHERE " + s + " " +
                 "ORDER BY NAME";
-
-        try {
-            dbConnection = getDBConnection();
             statement = dbConnection.createStatement();
             System.out.println(selectUserSQL);
             // execute select SQL stetement
@@ -284,12 +210,6 @@ public class UserDAO extends DTO{
             if (statement != null) {
                 statement.close();
             }
-            if (dbConnection != null) {
-                dbConnection.close();
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
     }
     @SuppressWarnings("unused")
     private static Stream<Arguments> usersNam() {

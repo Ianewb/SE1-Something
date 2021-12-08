@@ -18,14 +18,12 @@ public class EventDAO extends DTO{
     @DisplayName("Should Print Results")
     @ParameterizedTest(name = "{index} => emp = {0}")
     @MethodSource("objectList")
-    public Event getEvent(int id, String Start){
+    public Event getEvent(int id, String Start, Connection dbConnection) throws SQLException{
         Event returning = new Event();
-        Connection dbConnection = null;
         Statement statement = null;
         String getSQL = null;
         String getSQLDat = "SELECT * FROM Events WHERE C_ID=" + id + " AND DATE_START=TIMESTAMP('" + Start + "')" ;
-        try {
-            dbConnection = getDBConnection();
+
             statement = dbConnection.createStatement();
             System.out.println(getSQLDat);
             // execute the SQL stetement
@@ -60,12 +58,6 @@ public class EventDAO extends DTO{
             if (statement != null) {
                 statement.close();
             }
-            if (dbConnection != null) {
-                dbConnection.close();
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
 
         return returning;
     }
@@ -86,12 +78,9 @@ public class EventDAO extends DTO{
     @DisplayName("Should delete User with matching ID")
     @ParameterizedTest(name = "{index} => id = {0}")
     @MethodSource("emails")
-    public void deleteEvent(String start){
-        Connection dbConnection = null;
+    public void deleteEvent(String start, Connection dbConnection) throws SQLException{
         Statement statement = null;
         String deleteUserSQL = "DELETE FROM Events WHERE DATE_START= '" + start + "'";
-        try {
-            dbConnection = getDBConnection();
             statement = dbConnection.createStatement();
             System.out.println(deleteUserSQL);
             // execute delete SQL stetement
@@ -100,11 +89,6 @@ public class EventDAO extends DTO{
             if (statement != null) {
                 statement.close();
             }
-            if (dbConnection != null) {
-                dbConnection.close();
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+
     }
 }

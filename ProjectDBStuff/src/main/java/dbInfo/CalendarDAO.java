@@ -26,14 +26,11 @@ public class CalendarDAO extends DTO {
     @DisplayName("Should Print Results")
     @ParameterizedTest(name = "{index} => emp = {0}")
     @MethodSource("objectList")
-    public CalendarApp getCalendar(int id){
+    public CalendarApp getCalendar(int id, Connection dbConnection) throws SQLException{
         CalendarApp returning = new CalendarApp();
-        Connection dbConnection;
         Statement statement;
         String getSQL;
         String getSQLDat = "SELECT * FROM CalendarS WHERE ID=" + id;
-        try {
-            dbConnection = getDBConnection();
             statement = dbConnection.createStatement();
             System.out.println(getSQLDat);
             // execute the SQL stetement
@@ -52,11 +49,12 @@ public class CalendarDAO extends DTO {
                 if(rs.next()) {
                     do {//adds users to the calendar
                         Event event = eventStore.getEvent(rs.getInt("C_ID"),
-                                                            si.format(rs.getTimestamp("DATE_START")));
+                                                            si.format(rs.getTimestamp("DATE_START")),
+                                                            dbConnection);
                         returning.addEvent(event);
                         for(String u: event.getUsers())
                         {
-                            User user = userStore.getUser(u);
+                            User user = userStore.getUser(u,dbConnection);
                             if(!returning.getUsers().contains(user.getEmail()))
                             {
                                 returning.addUser(u);
@@ -80,12 +78,6 @@ public class CalendarDAO extends DTO {
             if (statement != null) {
                 statement.close();
             }
-            if (dbConnection != null) {
-                dbConnection.close();
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
         return returning;
     }
     @SuppressWarnings("unused")
