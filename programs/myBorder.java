@@ -18,7 +18,7 @@ public class myBorder {
         }
         @Override
         public Insets getBorderInsets(Component c) {
-            return new Insets(2, 0, 0, 0);
+            return new Insets(2, 0,0, 0);
         }
 
         @Override
@@ -28,7 +28,7 @@ public class myBorder {
 
         @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-            g.drawRoundRect(0, 0, width, height, radius, radius);
+            g.drawRoundRect(0, 0, width - 1, height - 1, radius, radius);
         }
     }
 
@@ -44,7 +44,7 @@ public class myBorder {
 
         @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-            g.drawRect(0, 0, width, height);
+            g.drawRect(0, 0, width - 1, height - 1);
         }
 
         @Override
