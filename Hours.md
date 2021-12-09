@@ -1,16 +1,16 @@
 ### Hours spent on project
 
 **Jason Wu** 
-* 40 hours
+* 56 hours
 
 **Jacob Senior** 
-* 42 hours
+* 71.5 hours
 
 **Ricky Zhao** 
-* 27 hours
+* 49 hours
 
 **Yi Ding** 
-* 13.5 hours
+* 24.5 hours
 
 We used [Trello](https://trello.com/b/HqqftTBT/something-normal) to keep track of our progress.
 
