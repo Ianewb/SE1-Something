@@ -1,7 +1,7 @@
 ### Videos per member
 
 **Jason Wu** 
-* [UC 1]()
+* [UC 1](https://youtu.be/sSwuCtWXymc)
 * [UC 2]()
 * [UC 3]()
 
