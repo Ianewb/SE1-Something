@@ -22,16 +22,22 @@ import javax.swing.SwingConstants;
 
 public class LoginUI {
 	private static volatile boolean requestedLogin = false;
+	private static volatile boolean isCreatingNew = false;
+	private static volatile boolean clickedCreatingNew = false;
+	private static volatile boolean closedCreatingNew = false;
+
 	private static JTextField newUserText;
 	private static JPasswordField newPassText;
 	private static JTextField newEmailText;
 	private static JTextField emailField;
 	private static JPasswordField passwordField;
 	
+	private static JDialog d;
+	
 	private static JFrame frame;
 	
 	private static void createNewAccDialog() {
-		final JDialog d = new JDialog();
+		d = new JDialog();
 		d.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		d.setTitle("Create Account");
 		
@@ -79,9 +85,6 @@ public class LoginUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				//Move implementation of DAO into server
-				UserDAO udao = new UserDAO();
-				String s = newEmailText.getText();
 				//Confirm users passwords match
 				if(!(newPassText.getPassword().length > 7)){ 
 					JOptionPane.showMessageDialog(d,
@@ -93,24 +96,8 @@ public class LoginUI {
 							"Passwords do not match.",
 							"Password Mismatch Error",
 							JOptionPane.WARNING_MESSAGE);
-				} else if( udao.verifyUserExist(s)) {
-				    //Dont add account if email already exists
-					JOptionPane.showMessageDialog(d,
-							"User already exists.",
-							"Email already registered",
-							JOptionPane.WARNING_MESSAGE);
 				} else {
-					//Add the account
-					UserDTO udto = new UserDTO();
-					User u = new User(newUserText.getText(),newEmailText.getText(),
-							newPassText.getPassword().toString(),0);
-					udto.save(u);
-					JOptionPane.showMessageDialog(d,
-							"Your account has been created.",
-							"Account Created",
-							JOptionPane.WARNING_MESSAGE);
-					//Add the account
-					d.dispose();
+					isCreatingNew = true;
 				}
 			}
 	    	
@@ -121,6 +108,7 @@ public class LoginUI {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				d.setVisible(false);
+				closedCreatingNew = true;
 				d.dispose();
 			}
 	    	
@@ -191,6 +179,7 @@ public class LoginUI {
         		javax.swing.SwingUtilities.invokeLater(new Runnable() {
                     public void run() {
                         //Open window for creating a new account
+                    	setClickedCreatingNew(true);
                     	createNewAccDialog();
                     }
                 });
@@ -243,9 +232,37 @@ public class LoginUI {
 	public static boolean isRequestedLogin() {
 		return requestedLogin;
 	}
+	
+	public static boolean isCreatingNew() {
+		return isCreatingNew;
+	}
+	
+	public static boolean isClickedCreatingNew() {
+		return clickedCreatingNew;
+	}
+	
+	public static boolean isClosedCreatingNew() {
+		return closedCreatingNew;
+	}
+	
+	public static JDialog getDialog() {
+		return d;
+	}
+
+	public static void setClosedCreatingNew(boolean closedCreatingNew) {
+		LoginUI.closedCreatingNew = closedCreatingNew;
+	}
+	
+	public static void setCreatingNew(boolean creatingNew) {
+		LoginUI.isCreatingNew = creatingNew;
+	}
 
 	public static void setRequestedLogin(boolean requestedLogin) {
 		LoginUI.requestedLogin = requestedLogin;
+	}
+	
+	public static void setClickedCreatingNew(boolean clickedCreatingNew) {
+		LoginUI.clickedCreatingNew = clickedCreatingNew;
 	}
 
 	public static JTextField getNewUserText() {
@@ -297,6 +314,18 @@ public class LoginUI {
 			    "Invalid login attempt. Please try again.",
 			    "Login error",
 			    JOptionPane.ERROR_MESSAGE);
+	}
+	
+	public static void createExistingUserError(){
+		JOptionPane.showMessageDialog(frame,
+			    "Account with email already exists.",
+			    "Error creating new account",
+			    JOptionPane.ERROR_MESSAGE);
+	}
+	
+	public static void createSuccessMsg() {
+		JOptionPane.showMessageDialog(frame,
+			    "Account successfully created");
 	}
 
 	public LoginUI(){

@@ -23,7 +23,6 @@ public class CalendarUI {
     public static JPanel MainCal = new JPanel();
     public static JPanel forDateList = new JPanel();
     public static ArrayList<JPanel> date = new ArrayList<>();
-    public static volatile boolean logout = false;
     
     public CalendarUI() {
 		//Create and show the calendar GUI
@@ -75,40 +74,6 @@ public class CalendarUI {
     public static void CreateFrame() {
         frame.setSize(1200, 850);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        //initialize logout to be false
-        logout = false;
-        
-        //Add menu
-        JMenuBar menuBar;
-	    final JMenu menu;
-		final JMenuItem menuItem;
-		JMenuItem menuItem2;
-	    
-	    menuBar = new JMenuBar();
-	    
-	    menu = new JMenu("Menu");
-	    menuBar.add(menu);
-	    menuItem = new JMenuItem("Blacklist");
-	    menuItem.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-	    	
-	    });
-	    menu.add(menuItem);
-	    menu.addSeparator();
-	    menuItem2 = new JMenuItem("Logout");
-	    menuItem2.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				logout = true;
-			}
-	    	
-	    });
 
         // Create Top Panel
         TopPanel = CreateTop();
@@ -153,6 +118,8 @@ public class CalendarUI {
         forAll.add(TopPanel, BorderLayout.NORTH);
         forAll.add(centerPanel, BorderLayout.SOUTH);
 
+        JMenuBar menu = CreateMenu();
+        frame.setJMenuBar(menu);
         frame.add(forAll);
         frame.setVisible(true);
     }
@@ -326,6 +293,106 @@ public class CalendarUI {
     private static void createAndShowGUI() {
     	CreateFrame();
     }
+    
+    public static JMenuBar CreateMenu() {
+        JMenu menu = new JMenu("Menu");
+        JMenu help = new JMenu("Help");
+        JMenuBar mb = new JMenuBar();
+        JMenuItem refresh = new JMenuItem("Refresh");
+        JMenuItem blacklist = new JMenuItem("Blacklist");
+        final JMenuItem sendNotify = new JMenuItem("Notify");
+        JMenuItem notifyoff = new JMenuItem("Notify Off");
+
+        JMenuItem contact = new JMenuItem("Contact");
+        JMenuItem report = new JMenuItem("Report");
+        contact.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                final JFrame frame = new JFrame();
+
+                JOptionPane.showMessageDialog(frame,
+                        "Please Contact Tomas_Cerny@baylor.edu",
+                        "Need Help???",
+                        JOptionPane.NO_OPTION);
+            }
+        });
+
+        report.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                final JFrame frame = new JFrame("Report");
+                JOptionPane pane = new JOptionPane();
+                String str = pane.showInputDialog(frame,"Report Your Problem",
+                        "Report", JOptionPane.OK_CANCEL_OPTION);
+                System.out.println(str);
+            }
+        });
+
+        // TODO: Implement
+//        refresh.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//
+//            }
+//        });
+
+        blacklist.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                final JFrame email = new JFrame();
+                Dimension d = new Dimension(300, 70);
+                email.setPreferredSize(d);
+                JPanel emailPanel = new JPanel();
+                emailPanel.setPreferredSize(d);
+                JLabel emailLbl =  new JLabel("Email");
+                JTextField emailTF = new JTextField();
+                emailTF.setText("example@example.com");
+                JButton ban = new JButton("BAN!");
+
+                email.setTitle("Enter the Email");
+                emailPanel.add(emailLbl);
+                emailPanel.add(emailTF);
+                emailPanel.add(ban);
+                email.add(emailPanel);
+
+                // TODO: wait to be implement
+//            ban.addActionListener(new ActionListener() {
+//                @Override
+//                public void actionPerformed(ActionEvent e) {
+//
+//                }
+//            });
+                ban.addActionListener(new ActionListener() {
+
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        // TODO Auto-generated method stub
+                        email.dispose();
+                    }
+
+                });
+
+                email.pack();
+                email.setVisible(true);
+            }
+        });
+
+//        sendNotify.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//
+//            }
+//        });
+        menu.add(refresh);
+        menu.add(blacklist);
+        menu.add(sendNotify);
+        menu.add(notifyoff);
+        mb.add(menu);
+        help.add(contact);
+        help.add(report);
+        mb.add(help);
+        return mb;
+    }
 
     public static void createDiscussionBoard() {
         JFrame DisB = new JFrame();
@@ -336,6 +403,7 @@ public class CalendarUI {
 //        main.setPreferredSize(new Dimension(400, 400));
 
         JPanel Task = new JPanel();
+        Task.setLayout(new BoxLayout(Task, BoxLayout.PAGE_AXIS));
 //        Task.setPreferredSize(new Dimension(400, 220));
         JTextField Title = new JTextField("Event Name");
         Title.setEditable(false);
@@ -345,9 +413,21 @@ public class CalendarUI {
         JTextArea Description = new JTextArea("Description");
         Description.setEditable(false);
         Description.setPreferredSize(new Dimension(350, 200));
+        
+        JButton accessabilityButton = new JButton("Change accessability");
+        accessabilityButton.addActionListener(new ActionListener() {
 
-        Task.add(Title, BorderLayout.NORTH);
-        Task.add(Description, BorderLayout.SOUTH);
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(DisB,
+					    "Accessability has been set to public.");
+			}
+        	
+        });
+
+        Task.add(Title);
+        Task.add(accessabilityButton);
+        Task.add(Description);
 
         ChatUI c = new ChatUI();
         DisB.add(Task);
