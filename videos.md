@@ -7,11 +7,11 @@
 * 71.5 hours
 
 **Ricky Zhao** 
-* "https://youtu.be/C-TEz3bpVF0"
-* "https://youtu.be/53sP2KXVsdg"
-* "https://youtu.be/RAZ9VuNLh6E"
+* [UC 1](https://youtu.be/C-TEz3bpVF0)
+* [UC 2](https://youtu.be/53sP2KXVsdg)
+* [UC 3](https://youtu.be/RAZ9VuNLh6E)
 
 **Yi Ding** 
-* "https://youtu.be/_oUTtLKTHDo"
-* "https://youtu.be/ZLXH8JxO-0o"
-* "https://youtu.be/gwLzTaQxUNs"
+* [UC 1](https://youtu.be/_oUTtLKTHDo)
+* [UC 2](https://youtu.be/ZLXH8JxO-0o)
+* [UC 3](https://youtu.be/gwLzTaQxUNs)
