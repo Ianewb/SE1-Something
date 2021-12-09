@@ -7,9 +7,9 @@
 
 
 **Jacob Senior** 
-* [UC 1]()
-* [UC 2]()
-* [UC 3]()
+* [UC 1](https://youtu.be/L7pIxocbMTw)
+* [UC 2](https://youtu.be/l6HXZOQqHbI)
+* [UC 3](https://youtu.be/dj4Tm_rlJAA)
 
 **Ricky Zhao** 
 * [UC 1](https://youtu.be/C-TEz3bpVF0)
