@@ -3,7 +3,7 @@
 **Jason Wu** 
 * [UC 1](https://youtu.be/sSwuCtWXymc)
 * [UC 2](https://youtu.be/0DwUpv5bA_4)
-* [UC 3]()
+* [UC 3](https://youtu.be/YbPLSkdDDjY)
 
 
 **Jacob Senior** 
