@@ -1,10 +1,15 @@
 ### Videos per member
 
 **Jason Wu** 
-* 56 hours
+* [UC 1]()
+* [UC 2]()
+* [UC 3]()
+
 
 **Jacob Senior** 
-* 71.5 hours
+* [UC 1]()
+* [UC 2]()
+* [UC 3]()
 
 **Ricky Zhao** 
 * [UC 1](https://youtu.be/C-TEz3bpVF0)
